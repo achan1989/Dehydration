@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ThinkTrees>
+
+<!-- These aren't useful by themselves, as they don't specify where in the
+     ThinkTree to patch themselves into.  That's done in the ModInit class,
+     and is currently hard-coded. -->
+
+<ThinkTreeDef>
+    <defName>Dehydration_Humanlike_Patch_GetWater_Dehydrated</defName>
+    <thinkRoot Class="achan1989.dehydration.ThinkNode_ConditionalDehydrated">
+        <subNodes>
+            <li Class="achan1989.dehydration.JobGiver_GetWater"/>
+        </subNodes>
+    </thinkRoot>
+</ThinkTreeDef>
+
+<ThinkTreeDef>
+    <defName>Dehydration_Humanlike_Patch_PackWater_NotThirsty</defName>
+    <thinkRoot Class="ThinkNode_ConditionalNeedAbove">
+        <need>Water</need>
+        <threshold>0.6</threshold>
+        <subNodes>
+            <li Class="achan1989.dehydration.JobGiver_PackWater"/>
+        </subNodes>
+    </thinkRoot>
+</ThinkTreeDef>
+
+<ThinkTreeDef>
+    <defName>Dehydration_Humanlike_Patch_GetWater</defName>
+    <thinkRoot Class="ThinkNode_PrioritySorter">
+        <subNodes>
+            <li Class="achan1989.dehydration.JobGiver_GetWater"/>
+        </subNodes>
+    </thinkRoot>
+</ThinkTreeDef>
+
+</ThinkTrees>

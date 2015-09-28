@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <NeedDef>
+    <DefName>Water</DefName>
+    <needClass>achan1989.dehydration.Need_Water</needClass>
+    <label>water</label>
+    <description>Water is the amount of water a creature has consumed recently. If it is at zero, a creature will take dehydration damage over time.</description>
+    <listPriority>900</listPriority>
+    <major>true</major>
+  </NeedDef>
+
+</Defs>

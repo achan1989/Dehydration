@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<ThingDef>
+    <defName>DehydrationInit</defName>
+    <category>Building</category>
+    <menuHidden>true</menuHidden>
+    <label>DehydrationInitializer</label>
+    <thingClass>Thing</thingClass>
+    <inspectorTabs>
+        <li>achan1989.dehydration.ModInitTab</li>
+    </inspectorTabs>
+</ThingDef>
+
+</Defs>

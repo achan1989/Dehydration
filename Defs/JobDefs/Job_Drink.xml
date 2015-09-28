@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<JobDefs>
+
+  <!--============ Need satisfaction ============-->
+
+  <JobDef>
+    <defName>Drink</defName>
+    <driverClass>achan1989.dehydration.JobDriver_GetWater</driverClass>
+    <reportString>Drinking from TargetA.</reportString>
+  </JobDef>
+
+</JobDefs>

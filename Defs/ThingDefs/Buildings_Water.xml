@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ThingDefs>
+
+<ThingDef Name="WellBase" Abstract="True">
+    <category>Building</category>
+    <ThingClass>Building</ThingClass>
+    <selectable>true</selectable>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <DesignationCategory>Production</DesignationCategory>
+    <building>
+        <claimable>true</claimable>
+    </building>
+    <comps>
+        <li>
+            <compClass>CompForbiddable</compClass>
+        </li>
+    </comps>
+    <terrainAffordanceNeeded>Diggable</terrainAffordanceNeeded>
+</ThingDef>
+
+<ThingDef ParentName="WellBase">
+    <defName>ImprovisedWell</defName>
+    <label>improvised well</label>
+    <Description>A rudimentary well that provides a small amount of water.</Description>
+    <graphicData>
+        <texPath>Things/Buildings/ImprovisedWell.tex</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+        <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <Size>(2,2)</Size>
+    <comps>
+        <li Class="achan1989.dehydration.CompPropertiesWaterSource">
+            <compClass>achan1989.dehydration.CompWaterSource</compClass>
+            <capacity>300.0</capacity>
+            <regenPerDay>30.0</regenPerDay>
+        </li>
+    </comps>
+    <AltitudeLayer>Floor</AltitudeLayer>
+    <fillPercent>0.1</fillPercent>
+    <passability>Impassable</passability>
+    <statBases>
+        <WorkToMake>6000</WorkToMake>
+        <MaxHitPoints>100</MaxHitPoints>
+        <Flammability>0.0</Flammability>
+    </statBases>
+    <building>
+        <expandHomeArea>false</expandHomeArea>
+    </building>
+    <constructEffect>ConstructDirt</constructEffect>
+    <soundImpactDefault>BulletImpactGround</soundImpactDefault>
+    <filthLeaving>RockRubble</filthLeaving>
+    <repairEffect>Mine</repairEffect>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+</ThingDef>
+
+
+
+</ThingDefs>

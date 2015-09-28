@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<ThingDef Name="CanteenBase" Abstract="True">
+    <thingClass>achan1989.dehydration.Apparel_WithCompGizmos</thingClass>
+    <category>Item</category>
+    <selectable>True</selectable>
+    <pathCost>10</pathCost>
+    <useHitPoints>True</useHitPoints>
+    <graphicData>
+      <onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
+    </graphicData>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <statBases>
+      <MaxHitPoints>20</MaxHitPoints>
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.2</DeteriorationRate>
+      <SellPriceFactor>0.2</SellPriceFactor>
+    </statBases>
+    <altitudeLayer>Item</altitudeLayer>
+    <alwaysHaulable>True</alwaysHaulable>
+    <tickerType>Never</tickerType>
+    <thingCategories>
+      <li>WearableWaterCarrier</li>
+    </thingCategories>
+    <comps>
+      <li>
+        <compClass>CompForbiddable</compClass>
+      </li>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+    </comps>
+    <apparel>
+        <bodyPartGroups>
+            <li>Torso</li>
+            <li>Legs</li>
+        </bodyPartGroups>
+        <layers>
+            <li>Accessory</li>
+        </layers>
+        <defaultOutfitTags>
+            <li>Anything</li>
+            <li>Worker</li>
+            <li>Soldier</li>
+            <li>Nudist</li>
+      </defaultOutfitTags>
+    </apparel>
+</ThingDef>
+
+<ThingDef Name="WaterskinMakeableBase" ParentName="CanteenBase" Abstract="True">
+    <recipeMaker>
+      <workSpeedStat>TailoringSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Tailor</effectWorking>
+      <soundWorking>Recipe_Tailor</soundWorking>
+      <recipeUsers>
+        <li>TableTailor</li>
+      </recipeUsers>
+      <unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+    </recipeMaker>
+    <stuffCategories>
+      <li>Leathery</li>
+    </stuffCategories>
+</ThingDef>
+
+<ThingDef Name="CanteenMakeableBase" ParentName="CanteenBase" Abstract="True">
+    <recipeMaker>
+      <workSpeedStat>SmithingSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Smith</soundWorking>
+      <recipeUsers>
+        <li>TableSmithing</li>
+      </recipeUsers>
+      <unfinishedThingDef>UnfinishedSculpture</unfinishedThingDef>
+    </recipeMaker>
+    <stuffCategories>
+      <li>Metallic</li>
+    </stuffCategories>
+</ThingDef>
+
+<ThingDef ParentName="WaterskinMakeableBase">
+    <defName>Apparel_Waterskin_Small</defName>
+    <label>small waterskin</label>
+    <description>A small waterskin with a capacity of 700mL.</description>
+    <graphicData>
+      <!-- TODO: graphics :O -->
+      <texPath>Things/Apparel/Waterskin_OnMap</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>20</costStuffCount>
+    <statBases>
+      <WorkToMake>600</WorkToMake>
+    </statBases>
+    <apparel>
+      <commonality>1</commonality>
+      <tags>
+        <li>Outlander</li>
+        <li>Spacer</li>
+        <li>Tribal</li>
+      </tags>
+    </apparel>
+    <comps>
+      <li Class="achan1989.dehydration.CompPropertiesWaterContainer">
+        <compClass>achan1989.dehydration.CompWaterContainer</compClass>
+        <capacity>0.7</capacity>
+      </li>
+    </comps>
+</ThingDef>
+
+<ThingDef ParentName="WaterskinMakeableBase">
+    <defName>Apparel_Waterskin_Large</defName>
+    <label>large waterskin</label>
+    <description>A large waterskin with a capacity of 2.5L.</description>
+    <graphicData>
+      <!-- TODO: graphics :O -->
+      <texPath>Things/Apparel/Waterskin_OnMap</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>40</costStuffCount>
+    <statBases>
+      <WorkToMake>900</WorkToMake>
+    </statBases>
+    <apparel>
+      <commonality>1</commonality>
+      <tags>
+        <li>Outlander</li>
+        <li>Spacer</li>
+        <li>Tribal</li>
+      </tags>
+    </apparel>
+    <comps>
+      <li Class="achan1989.dehydration.CompPropertiesWaterContainer">
+        <compClass>achan1989.dehydration.CompWaterContainer</compClass>
+        <capacity>2.5</capacity>
+      </li>
+    </comps>
+</ThingDef>
+
+<ThingDef ParentName="CanteenMakeableBase">
+    <defName>Apparel_Canteen_Small</defName>
+    <label>small canteen</label>
+    <description>A small canteen with a capacity of 700mL.</description>
+    <graphicData>
+      <!-- TODO: graphics :O -->
+      <texPath>Things/Apparel/Canteen_OnMap</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>20</costStuffCount>
+    <statBases>
+      <WorkToMake>1000</WorkToMake>
+    </statBases>
+    <apparel>
+      <commonality>1</commonality>
+      <tags>
+        <li>Outlander</li>
+        <li>Spacer</li>
+        <li>Military</li>
+      </tags>
+    </apparel>
+    <comps>
+      <li Class="achan1989.dehydration.CompPropertiesWaterContainer">
+        <compClass>achan1989.dehydration.CompWaterContainer</compClass>
+        <capacity>0.7</capacity>
+      </li>
+    </comps>
+</ThingDef>
+
+<ThingDef ParentName="CanteenMakeableBase">
+    <defName>Apparel_Canteen_Large</defName>
+    <label>large canteen</label>
+    <description>A large canteen with a capacity of 2.5L.</description>
+    <graphicData>
+      <!-- TODO: graphics :O -->
+      <texPath>Things/Apparel/Canteen_OnMap</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>40</costStuffCount>
+    <statBases>
+      <WorkToMake>1300</WorkToMake>
+    </statBases>
+    <apparel>
+      <commonality>1</commonality>
+      <tags>
+        <li>Outlander</li>
+        <li>Spacer</li>
+        <li>Military</li>
+      </tags>
+    </apparel>
+    <comps>
+      <li Class="achan1989.dehydration.CompPropertiesWaterContainer">
+        <compClass>achan1989.dehydration.CompWaterContainer</compClass>
+        <capacity>2.5</capacity>
+      </li>
+    </comps>
+</ThingDef>
+
+<!-- Valid apparel tags:
+Spacer
+Outlander
+Military
+Tribal
+-->
+
+<!--
+TODO: add canteens to required apparel for all humans
+  <apparelRequired>
+    <li>Apparel_PersonalShield</li>
+  </apparelRequired>
+
+TODO: fix canteen armor, and covering the head etc...
+-->
+
+</Defs>

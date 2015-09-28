@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ThingCategoryDefs>
+
+<ThingCategoryDef>
+    <defName>WearableWaterCarrier</defName>
+    <label>water carrier</label>
+    <parent>Apparel</parent>
+</ThingCategoryDef>
+
+</ThingCategoryDefs>
