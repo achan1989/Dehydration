@@ -105,6 +105,7 @@
       <li Class="achan1989.dehydration.CompPropertiesWaterContainer">
         <compClass>achan1989.dehydration.CompWaterContainer</compClass>
         <capacity>0.7</capacity>
+        <needsToolUser>true</needsToolUser>
       </li>
     </comps>
 </ThingDef>
@@ -134,6 +135,7 @@
       <li Class="achan1989.dehydration.CompPropertiesWaterContainer">
         <compClass>achan1989.dehydration.CompWaterContainer</compClass>
         <capacity>2.5</capacity>
+        <needsToolUser>true</needsToolUser>
       </li>
     </comps>
 </ThingDef>
@@ -163,6 +165,7 @@
       <li Class="achan1989.dehydration.CompPropertiesWaterContainer">
         <compClass>achan1989.dehydration.CompWaterContainer</compClass>
         <capacity>0.7</capacity>
+        <needsToolUser>true</needsToolUser>
       </li>
     </comps>
 </ThingDef>
@@ -192,6 +195,7 @@
       <li Class="achan1989.dehydration.CompPropertiesWaterContainer">
         <compClass>achan1989.dehydration.CompWaterContainer</compClass>
         <capacity>2.5</capacity>
+        <needsToolUser>true</needsToolUser>
       </li>
     </comps>
 </ThingDef>

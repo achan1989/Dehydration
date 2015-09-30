@@ -61,12 +61,17 @@ namespace achan1989.dehydration
 
             if (!props.unlimitedSource)
             {
-                StoredLitres += RegenPerRareTick;
-                if (StoredLitres > props.capacity)
-                {
-                    StoredLitres = props.capacity;
-                }
+                AddWater(RegenPerRareTick);
             }
+        }
+
+        public override float RemoveWater(float litresWanted)
+        {
+            if (props.unlimitedSource)
+            {
+                return litresWanted;
+            }
+            return base.RemoveWater(litresWanted);
         }
     }
 }

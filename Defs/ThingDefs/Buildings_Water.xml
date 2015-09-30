@@ -10,6 +10,7 @@
     <building>
         <claimable>true</claimable>
     </building>
+    <tickerType>Rare</tickerType>
     <comps>
         <li>
             <compClass>CompForbiddable</compClass>

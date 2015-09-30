@@ -13,6 +13,10 @@ namespace achan1989.dehydration
         /// The capacity of the container in litres.
         /// </summary>
         public float capacity = 1f;
+        /// <summary>
+        /// Whether an actor needs to be a tool user to use it.
+        /// </summary>
+        public bool needsToolUser = false;
 
         public CompPropertiesWaterContainer() : base()
         {
@@ -74,7 +78,7 @@ namespace achan1989.dehydration
             StoredLitres += litres;
         }
 
-        public float RemoveWater(float litresWanted)
+        virtual public float RemoveWater(float litresWanted)
         {
             if (litresWanted > StoredLitres) { litresWanted = StoredLitres; }
             StoredLitres -= litresWanted;
