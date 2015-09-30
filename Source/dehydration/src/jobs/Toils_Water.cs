@@ -75,5 +75,29 @@ namespace achan1989.dehydration
             });
             return toil;
         }
+
+        public static Toil TransferWater(Thing from, Thing to, float litres)
+        {
+            var fromWC = from.TryGetComp<CompWaterContainer>();
+            var toWC = to.TryGetComp<CompWaterContainer>();
+
+            var toil = new Toil();
+            toil.defaultCompleteMode = ToilCompleteMode.Delay;
+            toil.defaultDuration = 120;
+            toil.initAction = delegate
+            {
+                if (fromWC == null || toWC == null)
+                {
+                    Log.Error(string.Format("TransferWater has Thing without CompWaterContainer. " +
+                                            "From {0} to {1}.", from.Label, to.Label));
+                    toil.actor.jobs.curDriver.EndJobWith(JobCondition.Errored);
+                    return;
+                }
+
+                float transfer = fromWC.RemoveWater(litres);
+                toWC.AddWater(transfer);
+            };
+            return toil;
+        }
     }
 }
