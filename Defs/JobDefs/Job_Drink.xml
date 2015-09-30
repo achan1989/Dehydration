@@ -3,10 +3,17 @@
 
   <!--============ Need satisfaction ============-->
 
-  <JobDef>
+<!-- TODO: rename Drink job, make more namespace-safe. -->
+<JobDef>
     <defName>Drink</defName>
     <driverClass>achan1989.dehydration.JobDriver_GetWater</driverClass>
     <reportString>Drinking from TargetA.</reportString>
-  </JobDef>
+</JobDef>
+
+<JobDef>
+    <defName>Dehydration_PackWaterJob</defName>
+    <driverClass>achan1989.dehydration.JobDriver_PackWater</driverClass>
+    <reportString>Filling up TargetB from TargetA.</reportString>
+</JobDef>
 
 </JobDefs>

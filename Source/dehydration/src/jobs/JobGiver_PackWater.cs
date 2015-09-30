@@ -12,8 +12,19 @@ namespace achan1989.dehydration
     {
         protected override Job TryGiveTerminalJob(Pawn pawn)
         {
+            // Find a non-full water carrier you are wearing.
+            var packInto = WaterUtility.WaterInInventoryNotFull(pawn);
+            if (packInto != null)
+            {
+                // Find a source of water.
+                var packFrom = WaterUtility.BestWaterSpawnedFor(pawn);
+                if (packFrom != null)
+                {
+                    return new Job(DefDatabase<JobDef>.GetNamed("Dehydration_PackWaterJob"), packFrom, packInto);
+                }
+            }
+
             return null;
-            // TODO: implement!
         }
     }
 }

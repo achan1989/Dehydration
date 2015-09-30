@@ -28,6 +28,24 @@ namespace achan1989.dehydration
             return null;
         }
 
+        public static Apparel WaterInInventoryNotFull(Pawn pawn)
+        {
+            if (pawn.RaceProps.ToolUser)
+            {
+                return pawn.apparel.WornApparel.Find(ap =>
+                {
+                    var wc = ap.GetComp<CompWaterContainer>();
+                    if (wc != null)
+                    {
+                        return wc.FreeSpace > 0.01;
+                    }
+                    return false;
+                });
+            }
+
+            return null;
+        }
+
         public static bool ShouldReserveWaterSource(Thing thing, float wantedLitres)
         {
             var wc = thing.TryGetComp<CompWaterContainer>();
