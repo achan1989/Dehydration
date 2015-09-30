@@ -33,14 +33,21 @@ namespace achan1989.dehydration
                 return null;
             }
 
+            // Drink from water carriers you are wearing.
             var wornWater = WaterUtility.WaterInInventory(pawn);
             if (wornWater != null)
             {
                 return new Job(DefDatabase<JobDef>.GetNamed("Drink"), wornWater);
             }
 
+            // Look for other water sources.  Wells, water carriers on the ground, etc.
+            var otherWater = WaterUtility.BestWaterSpawnedFor(pawn);
+            if (otherWater != null)
+            {
+                return new Job(DefDatabase<JobDef>.GetNamed("Drink"), otherWater);
+            }
+
             return null;
-            // TODO: implement more sources.
         }
     }
 }
