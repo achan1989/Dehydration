@@ -10,6 +10,8 @@ namespace achan1989.dehydration
 {
     public class JobGiver_GetWater : ThinkNode_JobGiver
     {
+        private static readonly string DrinkJobDefName = "Dehydration_DrinkJob";
+
         public override float GetPriority(Pawn pawn)
         {
             var need = pawn.needs.TryGetNeed<Need_Water>();
@@ -37,14 +39,14 @@ namespace achan1989.dehydration
             var wornWater = WaterUtility.WaterInInventory(pawn);
             if (wornWater != null)
             {
-                return new Job(DefDatabase<JobDef>.GetNamed("Drink"), wornWater);
+                return new Job(DefDatabase<JobDef>.GetNamed(DrinkJobDefName), wornWater);
             }
 
             // Look for other water sources.  Wells, water carriers on the ground, etc.
             var otherWater = WaterUtility.BestWaterSpawnedFor(pawn);
             if (otherWater != null)
             {
-                return new Job(DefDatabase<JobDef>.GetNamed("Drink"), otherWater);
+                return new Job(DefDatabase<JobDef>.GetNamed(DrinkJobDefName), otherWater);
             }
 
             return null;
