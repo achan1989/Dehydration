@@ -23,11 +23,9 @@ namespace achan1989.dehydration
             bool worn = (wearable != null) && (pawn.apparel.WornApparel.Contains(wearable));
             if (!worn)
             {
-                Log.Message("Actor not wearing drinkable.");
                 // Actor not wearing a drinkable thing.
                 // Reserve it and move to the thing first.
                 yield return ReserveWaterIfNeeded(TargetThingA, wc, need.HydrationWantedLitres);
-                Log.Message("Generating GotoThing toil.");
                 yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch).
                     FailOnDespawnedOrForbidden(TargetIndex.A).FailOn(() => wc.IsEmpty);
             }
@@ -38,12 +36,10 @@ namespace achan1989.dehydration
             {
                 yield return SipWater(pawn, need, wc, worn);
             }
-            Log.Message(string.Format("Made {0} SipWater toils.", sips));
         }
 
         private static Toil ReserveWaterIfNeeded(Thing thing, CompWaterContainer wc, float wantedLitres)
         {
-            Log.Message("Generating ReserveWater toil.");
             Toil resWater = new Toil();
             resWater.defaultCompleteMode = ToilCompleteMode.Instant;
             resWater.initAction = delegate
@@ -55,16 +51,15 @@ namespace achan1989.dehydration
                 {
                     Find.Reservations.Release(thing, actor);
                 } */
-                Log.Message("Running ReserveWater toil.");
                 if (wc.StoredLitres <= wantedLitres)
                 {
                     if (!thing.SpawnedInWorld || !Find.Reservations.CanReserve(resWater.actor, thing, 1))
                     {
-                        Log.Message("ReserveWater toil can't reserve.");
+                        Log.Warning("ReserveWater toil can't complete.");
                         resWater.actor.jobs.EndCurrentJob(JobCondition.Incompletable);
                         return;
                     }
-                    Log.Message("ReserveWater toil is reserving.");
+                    Log.Warning(string.Format("ReserveWater toil is reserving ({0} wanted, {1} stored in {2}).", wantedLitres, wc.StoredLitres, thing.Label));
                     Find.Reservations.Reserve(resWater.actor, thing, 1);
                 }
             };
@@ -73,20 +68,13 @@ namespace achan1989.dehydration
 
         private static Toil SipWater(Pawn drinker, Need_Water pawnNeed, CompWaterContainer waterContainer, bool wornByActor)
         {
-            Log.Message("Generating SipWater toil");
             var toil = new Toil();
             toil.defaultCompleteMode = ToilCompleteMode.Delay;
             toil.defaultDuration = 60;
             toil.initAction = delegate
             {
-                Log.Message("Running SipWater toil.");
                 float wantDrink = Math.Min(pawnNeed.HydrationWantedLitres, sipLitres);
                 float didDrink = pawnNeed.DrinkFrom(waterContainer, wantDrink);
-                Log.Message(string.Format("Drank {0}L.", didDrink));
-            };
-            toil.tickAction = delegate
-            {
-                Log.Message("SipWater tick");
             };
             toil.FailOnForbidden(TargetIndex.A);
             toil.FailOn(() => waterContainer.IsEmpty);
@@ -103,7 +91,6 @@ namespace achan1989.dehydration
                 }
                 return null;
             });
-            Log.Message("Generated SipWater toil");
             return toil;
         }
     }
