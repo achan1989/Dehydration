@@ -56,11 +56,11 @@
     <Compile Include="src\jobs\JobDriver_GetWater.cs" />
     <Compile Include="src\jobs\JobGiver_GetWater.cs" />
     <Compile Include="src\jobs\JobGiver_PackWater.cs" />
+    <Compile Include="src\jobs\Toils_Water.cs" />
     <Compile Include="src\ModInit.cs" />
     <Compile Include="src\Need_Water.cs" />
     <Compile Include="src\things\Apparel_WithCompGizmos.cs" />
     <Compile Include="src\ThoughtWorker_Water.cs" />
-    <Compile Include="src\jobs\Toils_Drink.cs" />
     <Compile Include="src\WaterUtility.cs" />
   </ItemGroup>
   <ItemGroup />
