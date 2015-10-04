@@ -62,6 +62,7 @@
     <Compile Include="src\Need_Water.cs" />
     <Compile Include="src\things\Apparel_WithCompGizmos.cs" />
     <Compile Include="src\ThoughtWorker_Water.cs" />
+    <Compile Include="src\TerrainFinder.cs" />
     <Compile Include="src\WaterUtility.cs" />
   </ItemGroup>
   <ItemGroup />
