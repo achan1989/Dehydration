@@ -14,16 +14,28 @@ namespace achan1989.dehydration
         {
             var need = pawn.needs.TryGetNeed<Need_Water>();
             var wc = TargetThingA.TryGetComp<CompWaterContainer>();
+            bool worn = false;
 
-            var wearable = TargetThingA as Apparel;
-            bool worn = (wearable != null) && (pawn.apparel.WornApparel.Contains(wearable));
-            if (!worn)
+            if (TargetA.HasThing)
             {
-                // Actor not wearing a drinkable thing.
-                // Reserve it and move to the thing first.
-                yield return Toils_Water.ReserveWaterIfNeeded(TargetThingA, wc, need.HydrationWantedLitres);
-                yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch).
-                    FailOnDespawnedOrForbidden(TargetIndex.A).FailOn(() => wc.IsEmpty);
+                var wearable = TargetThingA as Apparel;
+                worn = (wearable != null) && (pawn.apparel.WornApparel.Contains(wearable));
+                if (!worn)
+                {
+                    // Actor not wearing a drinkable Thing.
+                    // Reserve it if necessary and move to the Thing.
+                    yield return Toils_Water.ReserveWaterIfNeeded(TargetThingA, wc, need.HydrationWantedLitres);
+                    yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch).
+                        FailOnDespawnedOrForbidden(TargetIndex.A).FailOn(() => wc.IsEmpty);
+                }
+            }
+            else
+            {
+                // We're targeting a piece of terrain that has some water.
+                wc = new CompWaterSource();
+                wc.Initialize(new CompPropertiesWaterSource() {unlimitedSource=true});
+
+                yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.Touch);
             }
 
             // Now drink in little sips :P

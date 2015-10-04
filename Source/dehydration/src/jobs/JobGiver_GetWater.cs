@@ -42,11 +42,34 @@ namespace achan1989.dehydration
                 return new Job(DefDatabase<JobDef>.GetNamed(DrinkJobDefName), wornWater);
             }
 
-            // Look for other water sources.  Wells, water carriers on the ground, etc.
-            var otherWater = WaterUtility.BestWaterSpawnedFor(pawn);
-            if (otherWater != null)
+            // Look for other water sources.
+            // Wells, water carriers on the ground, etc.
+            var thingWater = WaterUtility.BestWaterSpawnedFor(pawn);
+            // Rivers, lakes, other terrain-based water sources.
+            var terrainWaterVec = WaterUtility.BestTerrainWaterFor(pawn);
+
+            // Pick the nearest of the other water sources.
+            if (thingWater != null && terrainWaterVec != null)
             {
-                return new Job(DefDatabase<JobDef>.GetNamed(DrinkJobDefName), otherWater);
+                float thingDist = (pawn.Position - thingWater.Position).LengthHorizontalSquared;
+                float terrainDist = (pawn.Position - terrainWaterVec.Value).LengthHorizontalSquared;
+                if (thingDist <= terrainDist)
+                {
+                    terrainWaterVec = null;
+                }
+                else
+                {
+                    thingWater = null;
+                }
+            }
+
+            if (thingWater != null)
+            {
+                return new Job(DefDatabase<JobDef>.GetNamed(DrinkJobDefName), thingWater);
+            }
+            else if (terrainWaterVec != null)
+            {
+                return new Job(DefDatabase<JobDef>.GetNamed(DrinkJobDefName), terrainWaterVec.Value);
             }
 
             return null;

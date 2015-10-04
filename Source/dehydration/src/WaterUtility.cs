@@ -102,5 +102,20 @@ namespace achan1989.dehydration
                 priorityGetter, 0, 30, 9999f);
             return result;
         }
+
+        public static IntVec3? BestTerrainWaterFor(Pawn getter)
+        {
+            var terrainFinder = Find.Map.GetComponent<MapCompTerrainFinder>();
+            if (terrainFinder == null)
+            {
+                Log.Error("No MapCompTerrainFinder for terrain water search.");
+                return null;
+            }
+
+            var traverse = TraverseParms.For(getter, Danger.Deadly, TraverseMode.ByPawn);
+            Func<TerrainDef, bool> terrainPred = td =>
+                td.defName.Equals("WaterDeep") || td.defName.Equals("WaterShallow");
+            return terrainFinder.NearestTerrainOfType(getter.Position, terrainPred, traverse);
+        }
     }
 }

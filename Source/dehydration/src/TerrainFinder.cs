@@ -94,7 +94,7 @@ namespace achan1989.dehydration
                 return nearest;
             }
 
-            maxRegions = (maxRegions == 0 ? 30 : maxRegions);
+            maxRegions = (maxRegions == 0 ? 50 : maxRegions);
             
             float maxDistSquared = maxDistance * maxDistance;
             float closestDistSquared = 99999f;

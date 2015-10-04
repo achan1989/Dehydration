@@ -68,9 +68,6 @@ namespace achan1989.dehydration
             {
                 this.props = propsw;
             }
-
-            // TODO: return to zero after testing!
-            StoredLitres = propsw.capacity;
         }
 
         public void AddWater(float litres)

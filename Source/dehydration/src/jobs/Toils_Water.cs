@@ -55,15 +55,21 @@ namespace achan1989.dehydration
             toil.defaultDuration = sipTicks;
             toil.initAction = delegate
             {
+                bool fromThing = toil.actor.jobs.curJob.GetTarget(TargetIndex.A).HasThing;
+                if (fromThing)
+                {
+                    toil.FailOnForbidden(TargetIndex.A);
+                    if (!wornByActor)
+                    {
+                        toil.FailOnDespawned(TargetIndex.A);
+                    }
+                }
+
                 float wantDrink = Math.Min(pawnNeed.HydrationWantedLitres, sipLitres);
                 float didDrink = pawnNeed.DrinkFrom(waterContainer, wantDrink);
             };
-            toil.FailOnForbidden(TargetIndex.A);
             toil.FailOn(() => waterContainer.IsEmpty);
-            if (!wornByActor)
-            {
-                toil.FailOnDespawned(TargetIndex.A);
-            }
+            
             // TODO: toil.WithEffect();
             toil.WithSustainer(delegate
             {
