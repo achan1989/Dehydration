@@ -13,11 +13,12 @@ namespace achan1989.dehydration
         protected override IEnumerable<Toil> MakeNewToils()
         {
             var need = pawn.needs.TryGetNeed<Need_Water>();
-            var wc = TargetThingA.TryGetComp<CompWaterContainer>();
+            CompWaterContainer wc;
             bool worn = false;
 
             if (TargetA.HasThing)
             {
+                wc = TargetThingA.TryGetComp<CompWaterContainer>();
                 var wearable = TargetThingA as Apparel;
                 worn = (wearable != null) && (pawn.apparel.WornApparel.Contains(wearable));
                 if (!worn)
@@ -32,6 +33,7 @@ namespace achan1989.dehydration
             else
             {
                 // We're targeting a piece of terrain that has some water.
+                // This assumes that all terrain water acts as an infinite source.
                 wc = new CompWaterSource();
                 wc.Initialize(new CompPropertiesWaterSource() {unlimitedSource=true});
 
