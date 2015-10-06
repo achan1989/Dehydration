@@ -32,6 +32,7 @@
     <comps>
         <li Class="achan1989.dehydration.CompPropertiesWaterSource">
             <compClass>achan1989.dehydration.CompWaterSource</compClass>
+            <startsWith>10.0</startsWith>
             <capacity>300.0</capacity>
             <regenPerDay>30.0</regenPerDay>
         </li>

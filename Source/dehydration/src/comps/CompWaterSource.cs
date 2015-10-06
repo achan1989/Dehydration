@@ -17,6 +17,10 @@ namespace achan1989.dehydration
         /// How many litres will spontaneously generate per day.
         /// </summary>
         public float regenPerDay = 0f;
+        /// <summary>
+        /// When first built, the source already contains some litres.
+        /// </summary>
+        public float startsWith = 0f;
 
         public CompPropertiesWaterSource() : base()
         {
@@ -42,10 +46,18 @@ namespace achan1989.dehydration
                 this.props = propsw;
             }
 
-            if (this.props.unlimitedSource)
+            if (propsw.unlimitedSource)
             {
-                this.props.capacity = 999f;
+                propsw.capacity = 999f;
                 StoredLitres = 999f;
+            }
+            else if (propsw.startsWith > 0)
+            {
+                if (propsw.startsWith > propsw.capacity)
+                {
+                    propsw.startsWith = propsw.capacity;
+                }
+                StoredLitres = propsw.startsWith;
             }
         }
 
