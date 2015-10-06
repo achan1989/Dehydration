@@ -1,0 +1,30 @@
+Events
+-------
+Toxic cloud/rain causes wells to stop producing.
+Bulk water storage gets a leak, once bulk storage is a thing.
+
+Water Sources
+-------------
+Not-improvised well.
+Condensers.
+Rainfall collection.
+Desalination plant, if salt water ever becomes a thing.
+
+Mechanics
+---------
+SAVE GAME.  Can't save the state of any water stuff yet :(
+PRISONERS AND THE SICK NEED TO DRINK.  Jobs to give water to others :(
+ANIMALS NEED TO DRINK.  Add CompWaterDrinker to all animals :(  Can maybe inject generically, plus a few special cases for things like camels.  Generic is based on body size or food need, if that's possible?
+Reduced water need while asleep.
+Water need depends on temperature, sun exposure, maybe current job?
+Salt water.  The map generator for beaches would spawn salt water instead of fresh water, not drinkable without desalination.
+Bulk water storage.  Pumps?
+Digging canals?  Water in lakes (not edge-connected) eventually runs out if you canal too much?  Seems tricky...
+
+Health
+------
+Drinking from terrain water and improvised wells can cause sickness.  Water treatment plants?  Seems like overkill.
+
+Apparel
+-------
+Still-suits!
