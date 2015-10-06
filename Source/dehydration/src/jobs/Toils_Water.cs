@@ -82,11 +82,8 @@ namespace achan1989.dehydration
             return toil;
         }
 
-        public static Toil TransferWater(Thing from, Thing to, float litres)
+        public static Toil TransferWater(CompWaterContainer fromWC, CompWaterContainer toWC, float litres)
         {
-            var fromWC = from.TryGetComp<CompWaterContainer>();
-            var toWC = to.TryGetComp<CompWaterContainer>();
-
             var toil = new Toil();
             toil.defaultCompleteMode = ToilCompleteMode.Delay;
             toil.defaultDuration = 120;
@@ -94,8 +91,7 @@ namespace achan1989.dehydration
             {
                 if (fromWC == null || toWC == null)
                 {
-                    Log.Error(string.Format("TransferWater has Thing without CompWaterContainer. " +
-                                            "From {0} to {1}.", from.Label, to.Label));
+                    Log.Error("TransferWater has a null CompWaterContainer.");
                     toil.actor.jobs.curDriver.EndJobWith(JobCondition.Errored);
                     return;
                 }

@@ -13,16 +13,33 @@ namespace achan1989.dehydration
         protected override IEnumerable<Toil> MakeNewToils()
         {
             var fillInto = TargetThingB as Apparel;
-            var fillFrom = TargetThingA;
-            var fromWC = fillFrom.TryGetComp<CompWaterContainer>();
-            float packLitres = fillInto.TryGetComp<CompWaterContainer>().FreeSpace;
+            var toWC = fillInto.TryGetComp<CompWaterContainer>();
+            float packLitres = toWC.FreeSpace;
+            CompWaterContainer fromWC;
 
-            // Reserve and go to the source.
-            yield return Toils_Water.ReserveWaterIfNeeded(fillFrom, fromWC, packLitres);
-            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch).
+            if (TargetA.HasThing)
+            {
+                // Packing from a Thing.
+                var fillFrom = TargetThingA;
+                fromWC = fillFrom.TryGetComp<CompWaterContainer>();
+
+                // Reserve and go to the source.
+                yield return Toils_Water.ReserveWaterIfNeeded(fillFrom, fromWC, packLitres);
+                yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch).
                     FailOnDespawnedOrForbidden(TargetIndex.A).FailOn(() => fromWC.IsEmpty);
+            }
+            else
+            {
+                // Packing from a bit of terrain.
+                // This assumes that all terrain water acts as an infinite source.
+                fromWC = new CompWaterSource();
+                fromWC.Initialize(new CompPropertiesWaterSource() { unlimitedSource = true });
+
+                yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.Touch);
+            }
+            
             // Get water from the source.
-            yield return Toils_Water.TransferWater(fillFrom, fillInto, packLitres);
+            yield return Toils_Water.TransferWater(fromWC, toWC, packLitres);
         }
     }
 }
