@@ -26,7 +26,7 @@
 </ThinkTreeDef>
 
 <ThinkTreeDef>
-    <defName>Dehydration_Humanlike_Patch_GetWater</defName>
+    <defName>Dehydration_Patch_GetWater</defName>
     <thinkRoot Class="ThinkNode_PrioritySorter">
         <subNodes>
             <li Class="achan1989.dehydration.JobGiver_GetWater"/>

@@ -31,23 +31,25 @@ namespace achan1989.dehydration
         public readonly string GameObjectName = "Dehydration Init";
 
         private readonly string defnameCoreHumanlike = "Humanlike";
+        private readonly string defnameCoreAnimal = "Animal";
         private readonly string defnameGetWaterDehydrated = "Dehydration_Humanlike_Patch_GetWater_Dehydrated";
         private readonly string defnamePackWater = "Dehydration_Humanlike_Patch_PackWater_NotThirsty";
-        private readonly string defnameGetWater = "Dehydration_Humanlike_Patch_GetWater";
+        private readonly string defnameGetWater = "Dehydration_Patch_GetWater";
 
         public void Start()
         {
             enabled = false;
 
             Log.Message("Dehydration ModInit.Start()");
-            InjectThinkTrees();
+            InjectHumanThinkTrees();
+            InjectAnimalThinkTrees();
             InjectCompWaterDrinker();
         }
 
         public void FixedUpdate() { }
         public void OnLevelWasLoaded() { }
 
-        private void InjectThinkTrees()
+        private void InjectHumanThinkTrees()
         {
             var humanTree = DefDatabase<ThinkTreeDef>.GetNamed(defnameCoreHumanlike);
             if (humanTree != null)
@@ -65,11 +67,44 @@ namespace achan1989.dehydration
                     Log.Error("Dehydration can't find colonist ThinkTree to inject into.");
                 }
 
-                InjectGetWaterThink(humanTree.thinkRoot);
+                var mainBehaviours = humanTree.thinkRoot.subNodes.Find(node =>
+                    node is ThinkNode_PrioritySorter &&
+                    node.subNodes.Exists(subnode => subnode is JobGiver_GetFood));
+                if (mainBehaviours != null)
+                {
+                    InjectGetWaterThink(mainBehaviours);
+                }
+                else
+                {
+                    Log.Error("Dehydration can't find main behaviours ThinkTree to inject into.");
+                }
             }
             else
             {
                 Log.Error("Dehydration can't find humanlike ThinkTree to inject into.");
+            }
+        }
+
+        private void InjectAnimalThinkTrees()
+        {
+            var animalTree = DefDatabase<ThinkTreeDef>.GetNamed(defnameCoreAnimal);
+            if (animalTree != null)
+            {
+                var targetTree = animalTree.thinkRoot.subNodes.Find(node =>
+                    node is ThinkNode_PrioritySorter &&
+                    node.subNodes.Exists(subnode => subnode is JobGiver_GetFood));
+                if (targetTree != null)
+                {
+                    InjectGetWaterThink(targetTree);
+                }
+                else
+                {
+                    Log.Error("Dehydration can't find animal subtree to inject into.");
+                }
+            }
+            else
+            {
+                Log.Error("Dehydration can't find animal ThinkTree to inject into.");
             }
         }
 
@@ -121,29 +156,22 @@ namespace achan1989.dehydration
             }
         }
 
-        private void InjectGetWaterThink(ThinkNode humanTree)
+        private void InjectGetWaterThink(ThinkNode mainBehaviours)
         {
             bool failed = true;
             var drinkThink = DefDatabase<ThinkTreeDef>.GetNamed(defnameGetWater);
 
             if (drinkThink != null)
             {
-                var mainBehaviours = humanTree.subNodes.Find(node =>
-                    node is ThinkNode_PrioritySorter &&
-                    node.subNodes.Exists(subnode => subnode is JobGiver_GetFood));
-                if (mainBehaviours != null)
+                int foodIndex = mainBehaviours.subNodes.FindIndex(node =>
+                    node is JobGiver_GetFood);
+                if (foodIndex != -1)
                 {
-                    int foodIndex = mainBehaviours.subNodes.FindIndex(node =>
-                        node is JobGiver_GetFood);
-                    if (foodIndex != -1)
-                    {
-                        mainBehaviours.subNodes.Insert(foodIndex, drinkThink.thinkRoot.subNodes[0]);
-                        Log.Message(string.Format("Dehydration injected {0}", defnameGetWater));
-                        failed = false;
-                    }
-                    else { Log.Error("No foodIndex"); }
+                    mainBehaviours.subNodes.Insert(foodIndex, drinkThink.thinkRoot.subNodes[0]);
+                    Log.Message(string.Format("Dehydration injected {0}", defnameGetWater));
+                    failed = false;
                 }
-                else { Log.Error("No mainBehaviours"); }
+                else { Log.Error("No foodIndex"); }
             }
             else { Log.Error("No drinkThink"); }
 

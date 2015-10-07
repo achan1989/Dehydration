@@ -15,7 +15,7 @@ Desalination plant, if salt water ever becomes a thing.
 Mechanics
 ---------
 PRISONERS AND THE SICK NEED TO DRINK.  Jobs to give water to others :(
-ANIMALS NEED TO DRINK.  Update the animal thinktree.
+Wild animals can't drink from improvised well, fix that.
 Custom CompWaterDrinker on some animals eg camels.
 Animals that aren't pets leave the map when they get too thirsty -- simulates a search for water, and stops too much death :P
 Reduced water need while asleep.
@@ -32,3 +32,7 @@ Drinking from terrain water and improvised wells can cause sickness.  Water trea
 Apparel
 -------
 Still-suits!
+
+Misc
+-----
+Generic def injector?
