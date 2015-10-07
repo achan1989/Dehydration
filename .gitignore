@@ -1,6 +1,9 @@
 # ignore built assemblies
 [Aa]ssemblies/
 
+# ignore personal files
+tasks.txt
+
 #ignore thumbnails created by windows
 Thumbs.db
 #Ignore files build by Visual Studio
