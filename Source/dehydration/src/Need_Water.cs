@@ -9,8 +9,9 @@ namespace achan1989.dehydration
 {
     public class Need_Water : Need
     {
-        private const int TicksBetweenDehydrationDamage = 15000;
-        private const float DehydrationDamAmount = 0.066666f;
+        private const int TicksBetweenDehydrationDamage = 3600;
+        private const float DehydrationDamAmount = 0.03f;
+        
         private int tickToDehydrationDamage;
         private CompWaterDrinker waterDrinker;
 
