@@ -25,7 +25,7 @@ namespace achan1989.dehydration
 
         public CompPropertiesWaterDrinker() : base()
 		{
-            this.compClass = typeof(CompPropertiesWaterDrinker);
+            this.compClass = typeof(CompWaterDrinker);
 		}
 
         public CompPropertiesWaterDrinker(Type compClass)
