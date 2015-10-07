@@ -70,6 +70,12 @@ namespace achan1989.dehydration
             }
         }
 
+        public override void PostExposeData()
+        {
+            base.PostExposeData();
+            Scribe_Values.LookValue<float>(ref _storedLitres, "storedLitres");
+        }
+
         public void AddWater(float litres)
         {
             StoredLitres += litres;

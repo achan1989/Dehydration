@@ -12,11 +12,12 @@ Desalination plant, if salt water ever becomes a thing.
 
 Mechanics
 ---------
-SAVE GAME.  Can't save the state of any water stuff yet :(
 PRISONERS AND THE SICK NEED TO DRINK.  Jobs to give water to others :(
 ANIMALS NEED TO DRINK.  Add CompWaterDrinker to all animals :(  Can maybe inject generically, plus a few special cases for things like camels.  Generic is based on body size or food need, if that's possible?
+Animals leave the map when they get too thirsty -- simulates a search for water, and stops too much death :P
 Reduced water need while asleep.
 Water need depends on temperature, sun exposure, maybe current job?
+Plants need watering?
 Salt water.  The map generator for beaches would spawn salt water instead of fresh water, not drinkable without desalination.
 Bulk water storage.  Pumps?
 Digging canals?  Water in lakes (not edge-connected) eventually runs out if you canal too much?  Seems tricky...
