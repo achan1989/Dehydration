@@ -179,8 +179,13 @@ namespace achan1989.dehydration
                     return new CompPropertiesWaterDrinker() {capacity=1f, dailyNeed=0f, capacityWantDrink=0f};
                 }
 
-                // TODO: make an educated guess about how much water the animal needs.
-                return new CompPropertiesWaterDrinker() {capacity=1f, dailyNeed=1f, capacityWantDrink=1f};
+                // Make an educated guess about how much water the animal needs based on body size.
+                return new CompPropertiesWaterDrinker()
+                {
+                    capacity = 4 * thing.race.baseBodySize,
+                    dailyNeed = 3.5f * thing.race.baseBodySize,
+                    capacityWantDrink = 3 * thing.race.baseBodySize
+                };
             });
             
             foreach (ThingDef thing in DefDatabase<ThingDef>.AllDefs)
