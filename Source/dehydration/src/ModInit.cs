@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using System;
+using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.AI;
@@ -16,7 +17,7 @@ namespace achan1989.dehydration
             {
                 gameobject = new GameObject("DehydrationLoader");
                 gameobject.AddComponent<ModInit>();
-                Object.DontDestroyOnLoad(gameobject);
+                UnityEngine.Object.DontDestroyOnLoad(gameobject);
             }
         }
 
@@ -40,6 +41,7 @@ namespace achan1989.dehydration
 
             Log.Message("Dehydration ModInit.Start()");
             InjectThinkTrees();
+            InjectCompWaterDrinker();
         }
 
         public void FixedUpdate() { }
@@ -149,6 +151,47 @@ namespace achan1989.dehydration
             {
                 Log.Error(string.Format("Dehydration can't inject {0}", defnameGetWater));
             }
+        }
+
+        private void InjectCompWaterDrinker()
+        {
+            // Criteria for injecting a generic water drinker comp into a ThingDef.
+            Predicate<ThingDef> heuristicDoInjectGeneric = thing =>
+            {
+                if (thing.category != ThingCategory.Pawn) { return false; }
+                if (thing.race == null) { return false; }
+                if (!thing.race.mechanoid && !thing.race.Animal) { return false; }
+
+                // Don't inject a generic water drinker comp if it already has one.
+                if (thing.CompDefFor<CompWaterDrinker>() != null) { return false; }
+
+                return true;
+            };
+
+            // Make a generic water drinker comp from a ThingDef.
+            var MakeWaterDrinkerComp = new Func<ThingDef, CompProperties>( thing =>
+            {
+                // Used to "remove" a water need from mechanoids (although currently it still shows up
+                // in the Needs tab).
+                // TODO: remove water from mechanoid needs tab.
+                if (thing.race.mechanoid)
+                {
+                    return new CompPropertiesWaterDrinker() {capacity=1f, dailyNeed=0f, capacityWantDrink=0f};
+                }
+
+                // TODO: make an educated guess about how much water the animal needs.
+                return new CompPropertiesWaterDrinker() {capacity=1f, dailyNeed=1f, capacityWantDrink=1f};
+            });
+            
+            foreach (ThingDef thing in DefDatabase<ThingDef>.AllDefs)
+	        {
+                if (heuristicDoInjectGeneric(thing))
+                {
+                    Log.Message(string.Format("Injecting generic CompPropertiesWaterDrinker "
+                                + "into {0}", thing.defName));
+                    thing.comps.Add(MakeWaterDrinkerComp(thing));
+                }
+	        }
         }
     }
 }
