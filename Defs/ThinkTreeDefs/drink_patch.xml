@@ -6,16 +6,7 @@
      and is currently hard-coded. -->
 
 <ThinkTreeDef>
-    <defName>Dehydration_Humanlike_Patch_GetWater_Dehydrated</defName>
-    <thinkRoot Class="achan1989.dehydration.ThinkNode_ConditionalDehydrated">
-        <subNodes>
-            <li Class="achan1989.dehydration.JobGiver_GetWater"/>
-        </subNodes>
-    </thinkRoot>
-</ThinkTreeDef>
-
-<ThinkTreeDef>
-    <defName>Dehydration_Humanlike_Patch_PackWater_NotThirsty</defName>
+    <defName>Dehydration_Patch_PackWater_NotThirsty</defName>
     <thinkRoot Class="ThinkNode_ConditionalNeedAbove">
         <need>Water</need>
         <threshold>0.6</threshold>

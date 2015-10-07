@@ -32,8 +32,7 @@ namespace achan1989.dehydration
 
         private readonly string defnameCoreHumanlike = "Humanlike";
         private readonly string defnameCoreAnimal = "Animal";
-        private readonly string defnameGetWaterDehydrated = "Dehydration_Humanlike_Patch_GetWater_Dehydrated";
-        private readonly string defnamePackWater = "Dehydration_Humanlike_Patch_PackWater_NotThirsty";
+        private readonly string defnamePackWater = "Dehydration_Patch_PackWater_NotThirsty";
         private readonly string defnameGetWater = "Dehydration_Patch_GetWater";
 
         public void Start()
@@ -111,7 +110,7 @@ namespace achan1989.dehydration
         private void InjectDehydrationThink(ThinkNode colonistTree)
         {
             bool failed = true;
-            var dehydrationThink = DefDatabase<ThinkTreeDef>.GetNamed(defnameGetWaterDehydrated);
+            var dehydrationThink = DefDatabase<ThinkTreeDef>.GetNamed(defnameGetWater);
 
             if (dehydrationThink != null)
             {
@@ -121,14 +120,14 @@ namespace achan1989.dehydration
                 if (starvingIndex != -1)
                 {
                     colonistTree.subNodes.Insert(starvingIndex, dehydrationThink.thinkRoot);
-                    Log.Message(string.Format("Dehydration injected {0}", defnameGetWaterDehydrated));
+                    Log.Message(string.Format("Dehydration injected {0}", defnameGetWater));
                     failed = false;
                 }
             }
 
             if (failed)
             {
-                Log.Error(string.Format("Dehydration can't inject {0}", defnameGetWaterDehydrated));
+                Log.Error(string.Format("Dehydration can't inject {0}", defnameGetWater));
             }
         }
 
