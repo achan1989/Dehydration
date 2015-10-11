@@ -49,10 +49,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\AI\PawnLocalAwareness.cs" />
     <Compile Include="src\AI\ThinkNode_ConditionalUrgentlyThirsty.cs" />
+    <Compile Include="src\commands\CommandGizmo_WaterContainerStatus.cs" />
     <Compile Include="src\comps\CompWaterContainer.cs" />
     <Compile Include="src\comps\CompWaterDrinker.cs" />
     <Compile Include="src\comps\CompWaterSource.cs" />
-    <Compile Include="src\CommandGizmo_WaterCanteenStatus.cs" />
     <Compile Include="src\HydratedCategory.cs" />
     <Compile Include="src\jobs\JobDriver_GetWater.cs" />
     <Compile Include="src\jobs\JobDriver_PackWater.cs" />

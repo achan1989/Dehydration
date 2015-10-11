@@ -14,7 +14,7 @@ namespace achan1989.dehydration
     /// </summary>
     public class CommandGizmo_WaterContainerStatus : Command
     {
-        private static readonly int windowID = "CommandGizmo_WaterCanteenStatus".GetHashCode();
+        private static readonly int windowID = "CommandGizmo_WaterContainerStatus".GetHashCode();
         private static readonly Texture2D FullTex = SolidColorMaterials.NewSolidColorTexture(new Color(0.06f, 0.63f, 0.95f));
         private static readonly Texture2D EmptyTex = SolidColorMaterials.NewSolidColorTexture(Color.clear);
 

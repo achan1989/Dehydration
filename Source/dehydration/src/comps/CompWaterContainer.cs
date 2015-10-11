@@ -55,9 +55,20 @@ namespace achan1989.dehydration
             get { return StoredLitres < 0.025; }
         }
 
+        private CommandGizmo_WaterContainerStatus _GizmoWaterStatus;
+        public CommandGizmo_WaterContainerStatus GizmoWaterStatus
+        {
+            get {
+                if (_GizmoWaterStatus == null)
+                {
+                    _GizmoWaterStatus = new CommandGizmo_WaterContainerStatus(this);
+                }
+                return _GizmoWaterStatus;
+            }
+        }
         public override IEnumerable<Command> CompGetGizmosExtra()
         {
-            yield return new CommandGizmo_WaterContainerStatus(this);
+            yield return GizmoWaterStatus;
         }
 
         public override void Initialize(CompProperties props)
