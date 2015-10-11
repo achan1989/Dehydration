@@ -7,4 +7,10 @@
     <parent>Apparel</parent>
 </ThingCategoryDef>
 
+<ThingCategoryDef>
+    <defName>Dehydration_WaterCarrier</defName>
+    <label>water carrier</label>
+    <parent>Furniture</parent>
+</ThingCategoryDef>
+
 </ThingCategoryDefs>

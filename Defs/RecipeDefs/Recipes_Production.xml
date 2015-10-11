@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RecipeDefs>
+
+<RecipeDef Name="BucketBase" Abstract="True">
+    <description>Make a bucket.</description>
+    <jobString>Making a bucket from TargetA.</jobString>
+    <allowMixingIngredients>false</allowMixingIngredients>
+    <workAmount>600</workAmount>
+    <workSkillLearnFactor>0.25</workSkillLearnFactor>
+</RecipeDef>
+
+<RecipeDef ParentName="BucketBase">
+    <defName>Dehydration_MakeBucketNotStone</defName>
+    <label>make bucket</label>
+    <recipeUsers>
+        <li>TableSmithing</li>
+    </recipeUsers>
+    <workSpeedStat>SmithingSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <ingredients>
+        <li>
+            <filter>
+                <categories>
+                    <li>ResourcesRaw</li>
+                </categories>
+                <exceptedCategories>
+                    <li>StoneBlocks</li>
+                </exceptedCategories>
+                <!-- no hops! would use the other kind of filter category but it crashes :( -->
+            </filter>
+            <count>15</count>
+        </li>
+    </ingredients>
+    <fixedIngredientFilter>
+        <categories>
+            <li>ResourcesRaw</li>
+        </categories>
+        <exceptedCategories>
+            <li>StoneBlocks</li>
+        </exceptedCategories>
+    </fixedIngredientFilter>
+    <productHasIngredientStuff>true</productHasIngredientStuff>
+    <products>
+        <Dehydration_Bucket>1</Dehydration_Bucket>
+    </products>
+    <!-- TODO: move to other?
+    <fixedIngredientFilter>
+        <categories>
+            <li>StoneChunks</li>
+        </categories>
+    </fixedIngredientFilter>
+    -->
+</RecipeDef>
+
+<RecipeDef ParentName="BucketBase">
+    <defName>Dehydration_MakeBucketStone</defName>
+    <label>make bucket</label>
+    <recipeUsers>
+        <li>TableStonecutter</li>
+    </recipeUsers>
+    <workSpeedStat>StonecuttingSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>CutStone</effectWorking>
+    <soundWorking>Recipe_MakeStoneBlocks</soundWorking>
+    <ingredients>
+        <li>
+            <filter>
+              <categories>
+                <li>StoneChunks</li>
+              </categories>
+            </filter>
+            <count>1</count>
+        </li>
+    </ingredients>
+    <fixedIngredientFilter>
+        <categories>
+            <li>StoneChunks</li>
+        </categories>
+    </fixedIngredientFilter>
+    <products>
+        <Dehydration_Bucket>1</Dehydration_Bucket>
+    </products>
+    <!-- TODO: move to other?
+    <fixedIngredientFilter>
+        <categories>
+            <li>StoneChunks</li>
+        </categories>
+    </fixedIngredientFilter>
+    -->
+</RecipeDef>
+
+</RecipeDefs>

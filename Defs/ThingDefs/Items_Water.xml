@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<ThingDef Name="ItemBase" Abstract="True">
+    <thingClass>ThingWithComps</thingClass>
+    <label>unspecified item</label>
+    <category>Item</category>
+    <thingCategories>
+        <li>Dehydration_WaterCarrier</li>
+    </thingCategories>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <useHitPoints>true</useHitPoints>
+    <selectable>true</selectable>
+    <altitudeLayer>Item</altitudeLayer>
+    <stackLimit>1</stackLimit>
+    <comps>
+        <li>
+            <compClass>CompForbiddable</compClass>
+        </li>
+    </comps>
+    <alwaysHaulable>true</alwaysHaulable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <rotatable>false</rotatable>
+    <pathCost>15</pathCost>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <socialPropernessMatters>false</socialPropernessMatters>
+</ThingDef>
+
+<ThingDef ParentName="ItemBase">
+    <defName>Dehydration_Bucket</defName>
+    <label>bucket</label>
+    <description>A small container for carrying water.</description>
+    <graphicData>
+        <texPath>Things/Items/Bucket.tex</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+        <WorkToMake>600</WorkToMake>
+        <MaxHitPoints>50</MaxHitPoints>
+        <MarketValue>1</MarketValue>
+        <Flammability>0.4</Flammability>
+    </statBases>
+    <fillPercent>0.1</fillPercent>
+    <passability>Standable</passability>
+    <comps>
+        <li Class="achan1989.dehydration.CompPropertiesWaterContainer">
+            <compClass>achan1989.dehydration.CompWaterContainer</compClass>
+            <capacity>10.0</capacity>
+            <alwaysFillMax>true</alwaysFillMax>
+        </li>
+    </comps>
+</ThingDef>
+
+<!-- TODO: make similar to bucket
+<ThingDef ParentName="BuildingBase">
+    <defName>Dehydration_WaterBarrel</defName>
+    <label>water barrel</label>
+    <Description>Holds water. Animals can't drink from this.</Description>
+    <graphicData>
+        <texPath>Things/Buildings/WaterBarrel.tex</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+        <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <Size>(1,1)</Size>
+    <comps>
+        <li Class="achan1989.dehydration.CompPropertiesWaterContainer">
+            <compClass>achan1989.dehydration.CompWaterContainer</compClass>
+            <capacity>40.0</capacity>
+            <needsToolUser>true</needsToolUser>
+        </li>
+    </comps>
+    <AltitudeLayer>Waist</AltitudeLayer>
+    <fillPercent>0.2</fillPercent>
+    <passability>PassThroughOnly</passability>
+    <statBases>
+        <WorkToMake>1800</WorkToMake>
+        <MaxHitPoints>120</MaxHitPoints>
+        <Flammability>0.4</Flammability>
+    </statBases>
+    <costStuffCount>25</costStuffCount>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+</ThingDef>
+-->
+
+</Defs>
