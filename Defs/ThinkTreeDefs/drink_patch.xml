@@ -25,4 +25,16 @@
     </thinkRoot>
 </ThinkTreeDef>
 
+<ThinkTreeDef>
+    <!-- Exit the map if very thirsty.  If you happen to walk near some water,
+         go drink it and stop exiting. -->
+    <defName>Dehydration_Patch_ExitMapThirsty</defName>
+    <thinkRoot Class="achan1989.dehydration.ThinkNode_ConditionalUrgentlyThirsty">
+        <subnodes>
+            <li Class="achan1989.dehydration.JobGiver_GetWater"/>
+            <li Class="achan1989.dehydration.JobGiver_ExitMapWalkRandomInterruptable"/>
+        </subnodes>
+    </thinkRoot>
+</ThinkTreeDef>
+
 </ThinkTrees>

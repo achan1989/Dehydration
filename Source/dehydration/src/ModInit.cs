@@ -34,6 +34,7 @@ namespace achan1989.dehydration
         private readonly string defnameCoreAnimal = "Animal";
         private readonly string defnamePackWater = "Dehydration_Patch_PackWater_NotThirsty";
         private readonly string defnameGetWater = "Dehydration_Patch_GetWater";
+        private readonly string defnameExitMapThirsty = "Dehydration_Patch_ExitMapThirsty";
 
         public void Start()
         {
@@ -98,7 +99,21 @@ namespace achan1989.dehydration
                 }
                 else
                 {
-                    Log.Error("Dehydration can't find animal subtree to inject into.");
+                    Log.Error("Dehydration can't find animal subtree to inject GetWater into.");
+                }
+
+                targetTree = animalTree.thinkRoot.subNodes.Find(node =>
+                    node is ThinkNode_ConditionalHasFaction &&
+                    node.subNodes.Exists(subnode =>
+                        subnode is ThinkNode_Subtree &&
+                        ((ThinkNode_Subtree)subnode).treeDef.defName == "LeaveIfWrongSeason"));
+                if (targetTree != null)
+                {
+                    InjectExitMapOnThirsty(targetTree);
+                }
+                else
+                {
+                    Log.Error("Dehydration can't find animal subtree to inject ExitMap into.");
                 }
             }
             else
@@ -177,6 +192,25 @@ namespace achan1989.dehydration
             if (failed)
             {
                 Log.Error(string.Format("Dehydration can't inject {0}", defnameGetWater));
+            }
+        }
+
+        private void InjectExitMapOnThirsty(ThinkNode parent)
+        {
+            bool failed = true;
+            var exitThink = DefDatabase<ThinkTreeDef>.GetNamed(defnameExitMapThirsty);
+
+            if (exitThink != null)
+            {
+                parent.subNodes.Insert(0, new ThinkNode_Subtree() {treeDef = exitThink});
+                Log.Message(string.Format("Dehydration injected {0}", defnameExitMapThirsty));
+                failed = false;
+            }
+            else { Log.Error("No exit map think."); }
+
+            if (failed)
+            {
+                Log.Error(string.Format("Dehydration can't inject {0}", defnameExitMapThirsty));
             }
         }
 
