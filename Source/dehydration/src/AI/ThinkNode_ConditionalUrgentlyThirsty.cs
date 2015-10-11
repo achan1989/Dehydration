@@ -7,14 +7,16 @@ using Verse;
 
 namespace achan1989.dehydration
 {
-    public class ThinkNode_ConditionalDehydrated : ThinkNode_Conditional
+    public class ThinkNode_ConditionalUrgentlyThirsty : ThinkNode_Conditional
     {
         protected override bool Satisfied(Pawn pawn)
         {
             var need = pawn.needs.TryGetNeed<Need_Water>();
             if (need != null)
             {
-                return need.Dehydrated;
+                var curCategory = need.CurCategory;
+                return curCategory == HydratedCategory.UrgentlyThirsty ||
+                       curCategory == HydratedCategory.Dehydrated;
             }
 
             return false;
