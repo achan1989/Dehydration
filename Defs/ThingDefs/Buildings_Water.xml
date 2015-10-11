@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ThingDefs>
 
-<ThingDef Name="WellBase" Abstract="True">
+<ThingDef Name="BuildingBase" Abstract="True">
     <category>Building</category>
     <ThingClass>Building</ThingClass>
     <selectable>true</selectable>
@@ -10,14 +10,18 @@
     <building>
         <claimable>true</claimable>
     </building>
-    <tickerType>Rare</tickerType>
     <comps>
         <li>
             <compClass>CompForbiddable</compClass>
         </li>
     </comps>
+</ThingDef>
+
+<ThingDef Name="WellBase" ParentName="BuildingBase" Abstract="True">
+    <tickerType>Rare</tickerType>
     <terrainAffordanceNeeded>Diggable</terrainAffordanceNeeded>
 </ThingDef>
+
 
 <ThingDef ParentName="WellBase">
     <defName>ImprovisedWell</defName>
@@ -56,6 +60,38 @@
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
 </ThingDef>
 
-
+<ThingDef ParentName="BuildingBase">
+    <defName>Dehydration_WaterTrough</defName>
+    <label>water trough</label>
+    <Description>Holds water. Animals and people can drink from this.</Description>
+    <graphicData>
+        <texPath>Things/Buildings/WaterTrough.tex</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+        <drawSize>(2,1)</drawSize>
+    </graphicData>
+    <Size>(2,1)</Size>
+    <comps>
+        <li Class="achan1989.dehydration.CompPropertiesWaterContainer">
+            <compClass>achan1989.dehydration.CompWaterContainer</compClass>
+            <capacity>120.0</capacity>
+            <needsToolUser>false</needsToolUser>
+        </li>
+    </comps>
+    <AltitudeLayer>Waist</AltitudeLayer>
+    <fillPercent>0.2</fillPercent>
+    <passability>PassThroughOnly</passability>
+    <statBases>
+        <WorkToMake>1800</WorkToMake>
+        <MaxHitPoints>120</MaxHitPoints>
+        <Flammability>0.4</Flammability>
+    </statBases>
+    <costStuffCount>40</costStuffCount>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+</ThingDef>
 
 </ThingDefs>
