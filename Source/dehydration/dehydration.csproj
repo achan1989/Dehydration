@@ -55,6 +55,7 @@
     <Compile Include="src\HydratedCategory.cs" />
     <Compile Include="src\jobs\JobDriver_GetWater.cs" />
     <Compile Include="src\jobs\JobDriver_PackWater.cs" />
+    <Compile Include="src\jobs\JobGiver_ExitMapWalkRandomInterruptable.cs" />
     <Compile Include="src\jobs\JobGiver_GetWater.cs" />
     <Compile Include="src\jobs\JobGiver_PackWater.cs" />
     <Compile Include="src\jobs\Toils_Water.cs" />
