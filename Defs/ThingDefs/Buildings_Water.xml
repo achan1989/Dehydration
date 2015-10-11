@@ -35,6 +35,7 @@
             <startsWith>10.0</startsWith>
             <capacity>300.0</capacity>
             <regenPerDay>30.0</regenPerDay>
+            <manuallyFillable>false</manuallyFillable>
         </li>
     </comps>
     <AltitudeLayer>Floor</AltitudeLayer>
