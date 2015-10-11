@@ -6,7 +6,7 @@
     <ThingClass>Building</ThingClass>
     <selectable>true</selectable>
     <drawerType>MapMeshAndRealTime</drawerType>
-    <DesignationCategory>Production</DesignationCategory>
+    <DesignationCategory>Dehydration_Water</DesignationCategory>
     <building>
         <claimable>true</claimable>
     </building>
