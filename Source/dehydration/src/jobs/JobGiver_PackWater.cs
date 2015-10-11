@@ -41,15 +41,23 @@ namespace achan1989.dehydration
 
                 if (thingWater != null)
                 {
-                    return new Job(DefDatabase<JobDef>.GetNamed(PackJobDefName), thingWater, packInto);
+                    return MakePackWaterJob(thingWater, packInto);
                 }
                 else if (terrainWaterVec != null)
                 {
-                    return new Job(DefDatabase<JobDef>.GetNamed(PackJobDefName), terrainWaterVec.Value, packInto);
+                    return MakePackWaterJob(terrainWaterVec.Value, packInto);
                 }
             }
 
             return null;
+        }
+
+        private Job MakePackWaterJob(TargetInfo targetFrom, TargetInfo targetTo)
+        {
+            return new Job(DefDatabase<JobDef>.GetNamed(PackJobDefName), targetFrom, targetTo)
+            {
+                locomotionUrgency = LocomotionUrgency.Walk
+            };
         }
     }
 }

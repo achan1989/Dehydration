@@ -39,7 +39,7 @@ namespace achan1989.dehydration
             var wornWater = WaterUtility.WaterInInventory(pawn);
             if (wornWater != null)
             {
-                return new Job(DefDatabase<JobDef>.GetNamed(DrinkJobDefName), wornWater);
+                return MakeGetWaterJob(wornWater);
             }
 
             // Look for other water sources.
@@ -65,14 +65,22 @@ namespace achan1989.dehydration
 
             if (thingWater != null)
             {
-                return new Job(DefDatabase<JobDef>.GetNamed(DrinkJobDefName), thingWater);
+                return MakeGetWaterJob(thingWater);
             }
             else if (terrainWaterVec != null)
             {
-                return new Job(DefDatabase<JobDef>.GetNamed(DrinkJobDefName), terrainWaterVec.Value);
+                return MakeGetWaterJob(terrainWaterVec.Value);
             }
 
             return null;
+        }
+
+        private Job MakeGetWaterJob(TargetInfo target)
+        {
+            return new Job(DefDatabase<JobDef>.GetNamed(DrinkJobDefName), target)
+            {
+                locomotionUrgency = LocomotionUrgency.Walk
+            };
         }
     }
 }
