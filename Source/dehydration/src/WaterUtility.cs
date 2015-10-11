@@ -59,7 +59,7 @@ namespace achan1989.dehydration
             Predicate<Thing> baseValidator = (Thing t) =>
             {
                 return (!t.IsForbidden(getter) && t.IsSociallyProper(getter) &&
-                        getter.AnimalAwareOf(t) &&
+                        getter.AnimalAwareOfEx(t) &&
                         (!ShouldReserveWaterSource(t, wantedLitres) || getter.CanReserve(t, 1)));
             };
 

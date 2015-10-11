@@ -15,7 +15,6 @@ Desalination plant, if salt water ever becomes a thing.
 Mechanics
 ---------
 PRISONERS AND THE SICK NEED TO DRINK.  Jobs to give water to others :(
-Wild animals can't drink from improvised well, fix that.
 Custom CompWaterDrinker on some animals eg camels.
 Animals should probably have a wider water search radius, and remember where they drank from in the past.
 Reduced water need while asleep.
