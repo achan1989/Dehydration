@@ -37,7 +37,7 @@ namespace achan1989.dehydration
                     var wc = ap.GetComp<CompWaterContainer>();
                     if (wc != null)
                     {
-                        return wc.FreeSpace > 0.01;
+                        return wc.FreeSpaceLitres > 0.01;
                     }
                     return false;
                 });

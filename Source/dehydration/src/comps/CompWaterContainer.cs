@@ -57,9 +57,21 @@ namespace achan1989.dehydration
             get { return props.capacity; }
         }
 
-        public float FreeSpace
+        public float FreeSpaceLitres
         {
-            get { return props.capacity - StoredLitres; }
+            get
+            {
+                if (!ManuallyFillable || props.alwaysFillMax)
+                {
+                    return props.capacity - StoredLitres;
+                }
+                else
+                {
+                    float fillTo = ManualFillToLitres;
+                    if (StoredLitres >= fillTo) { return 0f; }
+                    return fillTo - StoredLitres;
+                }
+            }
         }
 
         public bool IsEmpty

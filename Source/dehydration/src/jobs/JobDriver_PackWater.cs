@@ -14,7 +14,7 @@ namespace achan1989.dehydration
         {
             var fillInto = TargetThingB as Apparel;
             var toWC = fillInto.TryGetComp<CompWaterContainer>();
-            float packLitres = toWC.FreeSpace;
+            float packLitres = toWC.FreeSpaceLitres;
             CompWaterContainer fromWC;
 
             if (TargetA.HasThing)
