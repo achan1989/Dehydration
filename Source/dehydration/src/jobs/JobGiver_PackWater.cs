@@ -18,9 +18,11 @@ namespace achan1989.dehydration
             var packInto = WaterUtility.WaterInInventoryNotFull(pawn);
             if (packInto != null)
             {
+                float wantedLitres = packInto.GetComp<CompWaterContainer>().FreeSpaceLitres;
+
                 // Find a source of water.
                 // Wells, water carriers on the ground, etc.
-                var thingWater = WaterUtility.BestWaterSpawnedFor(pawn);
+                var thingWater = WaterUtility.BestWaterSpawnedFor(pawn, wantedLitres);
                 // Rivers, lakes, other terrain-based water sources.
                 var terrainWaterVec = WaterUtility.BestTerrainWaterFor(pawn);
 

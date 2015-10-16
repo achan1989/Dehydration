@@ -52,10 +52,8 @@ namespace achan1989.dehydration
             return (wc != null && wc.StoredLitres <= wantedLitres);
         }
 
-        public static Thing BestWaterSpawnedFor(Pawn getter, bool allowPleasureDrug = true)
+        public static Thing BestWaterSpawnedFor(Pawn getter, float wantedLitres, bool allowPleasureDrug = true)
         {
-            float wantedLitres = getter.needs.TryGetNeed<Need_Water>().HydrationWantedLitres;
-
             Predicate<Thing> baseValidator = (Thing t) =>
             {
                 return (!t.IsForbidden(getter) && t.IsSociallyProper(getter) &&

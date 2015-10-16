@@ -42,9 +42,11 @@ namespace achan1989.dehydration
                 return MakeGetWaterJob(wornWater);
             }
 
+            float wantedLitres = pawn.needs.TryGetNeed<Need_Water>().HydrationWantedLitres;
+
             // Look for other water sources.
             // Wells, water carriers on the ground, etc.
-            var thingWater = WaterUtility.BestWaterSpawnedFor(pawn);
+            var thingWater = WaterUtility.BestWaterSpawnedFor(pawn, wantedLitres);
             // Rivers, lakes, other terrain-based water sources.
             var terrainWaterVec = WaterUtility.BestTerrainWaterFor(pawn);
 
