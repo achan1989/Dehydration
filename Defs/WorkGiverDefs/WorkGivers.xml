@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WorkGivers>
+
+<WorkGiverDef>
+    <defName>Dehydration_HaulWater</defName>
+    <giverClass>achan1989.dehydration.WorkGiver_HaulWater</giverClass>
+    <workType>Hauling</workType>
+    <verb>haul water to</verb>
+    <gerund>hauling water to</gerund>
+    <priorityInType>8</priorityInType>
+    <requiredCapacities>
+        <li>Manipulation</li>
+    </requiredCapacities>
+</WorkGiverDef>
+
+</WorkGivers>

@@ -56,12 +56,14 @@
     <Compile Include="src\comps\CompWaterSource.cs" />
     <Compile Include="src\HydratedCategory.cs" />
     <Compile Include="src\jobs\JobDriver_GetWater.cs" />
+    <Compile Include="src\jobs\JobDriver_HaulWater.cs" />
     <Compile Include="src\jobs\JobDriver_PackWater.cs" />
     <Compile Include="src\jobs\JobGiver_ExitMapWalkRandomInterruptable.cs" />
     <Compile Include="src\jobs\JobGiver_GetWater.cs" />
     <Compile Include="src\jobs\JobGiver_PackWater.cs" />
     <Compile Include="src\jobs\Toils_General.cs" />
     <Compile Include="src\jobs\Toils_Water.cs" />
+    <Compile Include="src\jobs\WorkGiver_HaulWater.cs" />
     <Compile Include="src\ModInit.cs" />
     <Compile Include="src\Need_Water.cs" />
     <Compile Include="src\things\Apparel_WithCompGizmos.cs" />

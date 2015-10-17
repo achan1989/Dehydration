@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<JobDefs>
+
+<JobDef>
+    <defName>Dehydration_HaulWaterJob</defName>
+    <driverClass>achan1989.dehydration.JobDriver_HaulWater</driverClass>
+    <reportString>Hauling water from TargetA to TargetB.</reportString>
+</JobDef>
+
+</JobDefs>
