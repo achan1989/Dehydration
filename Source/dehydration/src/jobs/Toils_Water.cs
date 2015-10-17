@@ -22,7 +22,6 @@ namespace achan1989.dehydration
             resWater.initAction = delegate
             {
                 // Reserve the thing if we'll empty it of water.
-                // TODO: when do we unreserve??
                 /*
                 if (thing != actor.carrier.CarriedThing && Find.Reservations.FirstReserverOf(thing, actor.Faction) == actor)
                 {
@@ -32,11 +31,9 @@ namespace achan1989.dehydration
                 {
                     if (!thing.SpawnedInWorld || !Find.Reservations.CanReserve(resWater.actor, thing, 1))
                     {
-                        Log.Warning("ReserveWater toil can't complete.");
                         resWater.actor.jobs.EndCurrentJob(JobCondition.Incompletable);
                         return;
                     }
-                    Log.Warning(string.Format("ReserveWater toil is reserving ({0} wanted, {1} stored in {2}).", wantedLitres, wc.StoredLitres, thing.Label));
                     Find.Reservations.Reserve(resWater.actor, thing, 1);
                 }
             };
@@ -82,7 +79,7 @@ namespace achan1989.dehydration
             return toil;
         }
 
-        public static Toil TransferWater(CompWaterContainer fromWC, CompWaterContainer toWC, float litres)
+        public static Toil TransferWater(CompWaterContainer fromWC, CompWaterContainer toWC, float maxLitres = -1f)
         {
             var toil = new Toil();
             toil.defaultCompleteMode = ToilCompleteMode.Delay;
@@ -96,8 +93,12 @@ namespace achan1989.dehydration
                     return;
                 }
 
-                float transfer = fromWC.RemoveWater(litres);
-                toWC.AddWater(transfer);
+                if (maxLitres < 0)
+                {
+                    maxLitres = Math.Min(fromWC.StoredLitres, toWC.FreeSpaceLitres);
+                }
+
+                WaterUtility.TransferWater(fromWC, toWC, maxLitres);
             };
             return toil;
         }

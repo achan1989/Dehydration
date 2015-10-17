@@ -147,6 +147,12 @@ namespace achan1989.dehydration
         public void AddWater(float litres)
         {
             StoredLitres += litres;
+            if (StoredLitres > CapacityLitres)
+            {
+                Log.Error(string.Format("WaterContainer + {0} litres = {1}, capacity {2}", litres,
+                    StoredLitres, CapacityLitres));
+                StoredLitres = CapacityLitres;
+            }
         }
 
         virtual public float RemoveWater(float litresWanted)
@@ -164,6 +170,11 @@ namespace achan1989.dehydration
         public void DecreaseWaterFillage()
         {
             fillageIndex = (fillageIndex + fillageLevels - 1) % fillageLevels;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("WaterContainer on {0}: {1}/{2}L", parent.ToString(), StoredLitres, CapacityLitres);
         }
     }
 }
