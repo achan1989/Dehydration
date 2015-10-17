@@ -52,14 +52,34 @@ namespace achan1989.dehydration
             return (wc != null && wc.StoredLitres <= wantedLitres);
         }
 
-        public static Thing BestWaterSpawnedFor(Pawn getter, float wantedLitres, bool allowPleasureDrug = true)
+        public static Thing BestWaterSpawnedFor(Pawn getter, float wantedLitres, Predicate<Thing> validator = null,
+            IntVec3? near = null, bool allowPleasureDrug = true)
         {
-            Predicate<Thing> baseValidator = (Thing t) =>
+            if (!near.HasValue)
             {
-                return (!t.IsForbidden(getter) && t.IsSociallyProper(getter) &&
-                        getter.AnimalAwareOfEx(t) &&
-                        (!ShouldReserveWaterSource(t, wantedLitres) || getter.CanReserve(t, 1)));
-            };
+                near = getter.Position;
+            }
+
+            Predicate<Thing> baseValidator;
+            if (validator == null)
+            {
+                baseValidator = (Thing t) =>
+                {
+                    return (!t.IsForbidden(getter) && t.IsSociallyProper(getter) &&
+                            getter.AnimalAwareOfEx(t) &&
+                            (!ShouldReserveWaterSource(t, wantedLitres) || getter.CanReserve(t, 1)));
+                };
+            }
+            else
+            {
+                baseValidator = (Thing t) =>
+                {
+                    return (!t.IsForbidden(getter) && t.IsSociallyProper(getter) &&
+                            getter.AnimalAwareOfEx(t) &&
+                            (!ShouldReserveWaterSource(t, wantedLitres) || getter.CanReserve(t, 1)) &&
+                            validator(t));
+                };
+            }
 
             // Can drink from anything that is a non-empty water container.
             Predicate<Thing> toolValidator = (Thing t) =>
@@ -79,29 +99,30 @@ namespace achan1989.dehydration
             };
 
             // Prefer a water source that has at least as much as we want.
-            // Otherwise make do with less.
+            // Otherwise prefer the one with the most.
             Func<Thing, int> priorityGetter = (Thing t) =>
             {
                 var wc = t.TryGetComp<CompWaterContainer>();
                 if (wc == null) { return -1; }
-                if (wc.StoredLitres >= wantedLitres) { return 1; }
-                return 0;
+                if (wc.StoredLitres >= wantedLitres) { return int.MaxValue; }
+                return (int) Math.Round(wc.StoredLitres, 0, MidpointRounding.AwayFromZero);
             };
             
+            // TODO: may be able to narrow down the ThingRequestGroup.
             var allThings = ThingRequest.ForGroup(ThingRequestGroup.Everything);
             var traverse = TraverseParms.For(getter, Danger.Deadly, TraverseMode.ByPawn);
-            Predicate<Thing> validator = toolValidator;
+            Predicate<Thing> searchValidator = toolValidator;
             if (!getter.RaceProps.ToolUser)
             {
-                validator = noToolValidator;
+                searchValidator = noToolValidator;
             }
             Thing result = GenClosest.RegionwiseBFSWorker(
-                getter.Position, allThings, PathEndMode.ClosestTouch, traverse, validator,
-                priorityGetter, 0, 30, 9999f);
+                near.Value, allThings, PathEndMode.ClosestTouch, traverse, searchValidator,
+                priorityGetter, 9, 30, 9999f);
             return result;
         }
 
-        public static IntVec3? BestTerrainWaterFor(Pawn getter)
+        public static IntVec3? BestTerrainWaterFor(Pawn getter, IntVec3? near = null)
         {
             var terrainFinder = Find.Map.GetComponent<MapCompTerrainFinder>();
             if (terrainFinder == null)
@@ -110,10 +131,16 @@ namespace achan1989.dehydration
                 return null;
             }
 
+            if (!near.HasValue)
+            {
+                near = getter.Position;
+            }
+
             var traverse = TraverseParms.For(getter, Danger.Deadly, TraverseMode.ByPawn);
             Func<TerrainDef, bool> terrainPred = td =>
                 td.defName.Equals("WaterDeep") || td.defName.Equals("WaterShallow");
-            return terrainFinder.NearestTerrainOfType(getter.Position, terrainPred, traverse);
+            return terrainFinder.NearestTerrainOfType(near.Value, terrainPred, traverse);
+        }
         }
     }
 }
