@@ -141,6 +141,40 @@ namespace achan1989.dehydration
                 td.defName.Equals("WaterDeep") || td.defName.Equals("WaterShallow");
             return terrainFinder.NearestTerrainOfType(near.Value, terrainPred, traverse);
         }
+
+        public static Thing HaulingToolInInventory(Pawn pawn)
+        {
+            if (pawn.inventory == null) { return null; }
+            return pawn.inventory.container.FirstOrDefault(thing =>
+                thing.TryGetComp<CompWaterContainer>() != null);
+        }
+
+        public static Thing NearestHaulingTool(Pawn getter)
+        {
+            var searchThings = ThingRequest.ForGroup(ThingRequestGroup.HaulableEver);
+            var traverse = TraverseParms.For(getter, Danger.Deadly, TraverseMode.ByPawn);
+            
+            Predicate<Thing> validator = (Thing t) =>
+                t.TryGetComp<CompWaterContainer>() != null &&
+                Find.Reservations.CanReserve(getter, t, 1);
+            
+            Thing result = GenClosest.RegionwiseBFSWorker(
+                getter.Position, searchThings, PathEndMode.ClosestTouch, traverse, validator,
+                null, 0, 40, 9999f);
+            return result;
+        }
+
+        public static void TransferWater(CompWaterContainer fromWc, CompWaterContainer toWc, float litres)
+        {
+            if (litres > toWc.FreeSpaceLitres)
+            {
+                Log.Error(string.Format("TransferWater() trying to put {0} litres into {1} with "
+                    + "{2} litres free space.", litres, toWc.parent.Label, toWc.FreeSpaceLitres));
+                litres = toWc.FreeSpaceLitres;
+            }
+
+            float transfer = fromWc.RemoveWater(litres);
+            toWc.AddWater(transfer);
         }
     }
 }
