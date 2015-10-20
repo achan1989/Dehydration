@@ -69,9 +69,46 @@ namespace achan1989.dehydration
             return null;
         }
 
-        private bool WaterAvailableInRoomTo(Pawn pawn)
+        private bool WaterAvailableInRoomTo(Pawn prisoner)
         {
-            return false;
+            if (WaterUtility.WaterInInventory(prisoner) != null)
+            {
+                return true;
+            }
+
+            float wantedLitres = 0f;
+            float availableLitres = 0f;
+
+            Room room = RoomQuery.RoomAt(prisoner.Position);
+            if (room == null)
+            {
+                return false;
+            }
+
+            foreach (Region region in room.Regions)
+            {
+                // Check how much water is available here.
+                foreach (Thing thing in region.ListerThings.ThingsInGroup(ThingRequestGroup.BuildingArtificial))
+                {
+                    var wc = thing.TryGetComp<CompWaterContainer>();
+                    if (wc != null)
+                    {
+                        availableLitres += wc.StoredLitres;
+                    }
+                }
+
+                // How much do prisoners want?
+                foreach (Pawn pawn in region.ListerThings.ThingsInGroup(ThingRequestGroup.Pawn))
+                {
+                    var waterNeed = pawn.needs.TryGetNeed<Need_Water>();
+                    if (pawn.IsPrisonerOfColony && waterNeed.NeedWaterSoon && (WaterUtility.WaterInInventory(pawn) == null))
+                    {
+                        wantedLitres += waterNeed.HydrationWantedLitres;
+                    }
+                }
+            }
+
+            return availableLitres >= wantedLitres;
         }
     }
 }
