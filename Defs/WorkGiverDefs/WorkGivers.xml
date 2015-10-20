@@ -13,4 +13,17 @@
     </requiredCapacities>
 </WorkGiverDef>
 
+<!-- Replace the base Warden with one that can keep prisoners watered. -->
+<WorkGiverDef>
+    <defName>Warden</defName>
+    <giverClass>achan1989.dehydration.WorkGiver_Warden</giverClass>
+    <workType>Warden</workType>
+    <verb>warden</verb>
+    <gerund>wardening</gerund>
+    <requiredCapacities>
+        <li>Manipulation</li>
+        <li>Talking</li>
+    </requiredCapacities>
+</WorkGiverDef>
+
 </WorkGivers>
