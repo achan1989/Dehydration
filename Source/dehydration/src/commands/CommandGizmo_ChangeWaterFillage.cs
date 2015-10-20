@@ -24,7 +24,6 @@ namespace achan1989.dehydration
             parentContainer = container;
             this.defaultLabel = "keep filled";
             this.icon = Icon;
-            UpdateDescription();
         }
 
         public override void ProcessInput(Event ev)
@@ -34,18 +33,19 @@ namespace achan1989.dehydration
             if (ev.button == 0)
             {
                 parentContainer.IncreaseWaterFillage();
-                UpdateDescription();
             }
             else if (ev.button == 1)
             {
                 parentContainer.DecreaseWaterFillage();
-                UpdateDescription();
             }
         }
 
-        private void UpdateDescription()
+        public override string Desc
         {
-            this.defaultDesc = string.Format(descriptionFragment, parentContainer.ManualFillToPercent);
+            get
+            {
+                return string.Format(descriptionFragment, parentContainer.ManualFillToPercent);
+            }
         }
 
         public override GizmoResult GizmoOnGUI(Vector2 topLeft)
@@ -58,7 +58,7 @@ namespace achan1989.dehydration
             Text.Anchor = TextAnchor.MiddleCenter;
             Text.Font = GameFont.Medium;
             Widgets.Label(middle, string.Format("{0}%", parentContainer.ManualFillToPercent));
-            Text.Font = GameFont.Small;
+            Text.Font = GameFont.Tiny;
             Text.Anchor = TextAnchor.UpperLeft;
 
             return result;
