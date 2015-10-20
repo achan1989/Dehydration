@@ -73,12 +73,21 @@ namespace achan1989.dehydration
             else
             {
                 // Wells, water carriers on the ground, etc.
-                // Don't take water from the target Thing.
-                // TODO: some priority logic to avoid transferring water between two containers in an infinite loop.
                 Predicate<Thing> validator = (Thing candidate) =>
                 {
-                    var wc = candidate.TryGetComp<CompWaterContainer>();
-                    return (wc != null && wc.StoredLitres > MinimumFill && !candidate.Equals(t));
+                    // Don't take water from the target Thing.
+                    if (candidate.Equals(t)) { return false; }
+                    
+                    var candidateWc = candidate.TryGetComp<CompWaterContainer>();
+                    if (candidateWc == null) { return false; }
+
+                    // Only take from containers with a lower priority.
+                    if (candidateWc.ManuallyFillable && candidateWc.Priority >= toWc.Priority)
+                    {
+                        return false;
+                    }
+                    // Don't haul if the source has too little water.
+                    return candidateWc.StoredLitres > MinimumFill;
                 };
                 var thingWater = WaterUtility.BestWaterSpawnedFor(pawn, collectLitres, validator, waterNear);
             
