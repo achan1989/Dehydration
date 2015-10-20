@@ -42,9 +42,10 @@ namespace achan1989.dehydration
         private readonly int fillageLevels = 5;
         private readonly int defaultFillageIndex = 4;
         private int fillageIndex = -1;
+        private StoragePriority priorityInt = StoragePriority.Normal;
 
         new public CompPropertiesWaterContainer props;
-        
+
         private float _storedLitres;
         public float StoredLitres
         {
@@ -94,10 +95,16 @@ namespace achan1989.dehydration
             get { return UnityEngine.Mathf.RoundToInt(100f / (fillageLevels - 1) * fillageIndex); }
         }
 
+        public StoragePriority Priority
+        {
+            get { return priorityInt; }
+        }
+
         private CommandGizmo_WaterContainerStatus _GizmoWaterStatus;
         public CommandGizmo_WaterContainerStatus GizmoWaterStatus
         {
-            get {
+            get
+            {
                 if (_GizmoWaterStatus == null)
                 {
                     _GizmoWaterStatus = new CommandGizmo_WaterContainerStatus(this);
@@ -119,10 +126,27 @@ namespace achan1989.dehydration
             }
         }
 
+        private CommandGizmo_ChangeWaterFillPriority _GizmoFillPriority;
+        public CommandGizmo_ChangeWaterFillPriority GizmoFillPriority
+        {
+            get
+            {
+                if (_GizmoFillPriority == null)
+                {
+                    _GizmoFillPriority = new CommandGizmo_ChangeWaterFillPriority(this);
+                }
+                return _GizmoFillPriority;
+            }
+        }
+
         public override IEnumerable<Command> CompGetGizmosExtra()
         {
             yield return GizmoWaterStatus;
-            if (ManuallyFillable && !props.alwaysFillMax) { yield return GizmoWaterFillage; }
+            if (ManuallyFillable && !props.alwaysFillMax)
+            {
+                yield return GizmoWaterFillage;
+                yield return GizmoFillPriority;
+            }
         }
 
         public override void Initialize(CompProperties props)
@@ -142,6 +166,7 @@ namespace achan1989.dehydration
             base.PostExposeData();
             Scribe_Values.LookValue<float>(ref _storedLitres, "storedLitres");
             Scribe_Values.LookValue<int>(ref fillageIndex, "fillageIndex", defaultFillageIndex);
+            Scribe_Values.LookValue<StoragePriority>(ref priorityInt, "priority", StoragePriority.Normal);
         }
 
         public void AddWater(float litres)
@@ -170,6 +195,18 @@ namespace achan1989.dehydration
         public void DecreaseWaterFillage()
         {
             fillageIndex = (fillageIndex + fillageLevels - 1) % fillageLevels;
+        }
+
+        public void IncreasePriority()
+        {
+            priorityInt = priorityInt.HigherPriority();
+            // TODO: possible to notify others that this has changed?  Pawns should fail current
+            // hauing job if this goes out of range.
+        }
+
+        public void DecreasePriority()
+        {
+            priorityInt = priorityInt.LowerPriority();
         }
 
         public override string ToString()
