@@ -44,7 +44,8 @@
     </comps>
     <AltitudeLayer>Floor</AltitudeLayer>
     <fillPercent>0.1</fillPercent>
-    <passability>Impassable</passability>
+    <PathCost>40</PathCost>
+    <passability>PassThroughOnly</passability>
     <statBases>
         <WorkToMake>6000</WorkToMake>
         <MaxHitPoints>100</MaxHitPoints>
