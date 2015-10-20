@@ -103,6 +103,11 @@ namespace achan1989.dehydration
 			get { return waterDrinker.props.capacity - CurLevelLitres;  }
 		}
 
+        public bool NeedWaterSoon
+        {
+            get { return CurLevelLitres <= waterDrinker.props.capacityWantDrink; }
+        }
+
 		public Need_Water(Pawn pawn) : base(pawn)
 		{
 			if (pawn.RaceProps.Humanlike)
