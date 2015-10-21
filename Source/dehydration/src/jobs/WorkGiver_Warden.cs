@@ -11,6 +11,7 @@ namespace achan1989.dehydration
     public class WorkGiver_Warden : RimWorld.WorkGiver_Warden
     {
         private readonly List<JobDef> CriticalJobDefs;
+        private readonly WorkGiverDef HaulWaterWorkGiverDef;
 
         public WorkGiver_Warden() : base()
         {
@@ -19,6 +20,8 @@ namespace achan1989.dehydration
                 DefDatabase<JobDef>.GetNamedSilentFail("EscortPrisonerToBed"),
                 DefDatabase<JobDef>.GetNamedSilentFail("TakeWoundedPrisonerToBed")
             };
+
+            HaulWaterWorkGiverDef = DefDatabase<WorkGiverDef>.GetNamed("Dehydration_HaulWater");
         }
 
         public override Job JobOnThing(Pawn pawn, Thing t)
@@ -57,12 +60,21 @@ namespace achan1989.dehydration
                     {
                         // TODO: look for suitable water source, and give water to patient.
                         // return new Job(blah)
+                        return null;
                     }
                 }
                 else if (!WaterAvailableInRoomTo(prisoner))
                 {
-                    // TODO: look for suitable water container in room.
-                    // TODO: haul water to container.
+                    Thing haulTo = BestWaterContainerInPrison(prisoner);
+                    if (haulTo != null)
+                    {
+                        var haulWorkGiver = HaulWaterWorkGiverDef.Worker as WorkGiver_HaulWater;
+                        if (haulWorkGiver != null)
+                        {
+                            // Use the existing WorkGiver for water hauling.
+                            return haulWorkGiver.JobOnThing(warden, haulTo);
+                        }
+                    }
                 }
             }
 
@@ -109,6 +121,14 @@ namespace achan1989.dehydration
             }
 
             return availableLitres >= wantedLitres;
+        }
+
+        private Thing BestWaterContainerInPrison(Pawn prisoner)
+        {
+            var prisonContainers = WaterUtility.WaterContainersInRoom(prisoner.Position);
+            return prisonContainers.OrderByDescending(container =>
+                container.TryGetComp<CompWaterContainer>().FreeSpaceLitres
+            ).FirstOrDefault();
         }
     }
 }
