@@ -176,5 +176,31 @@ namespace achan1989.dehydration
             float transfer = fromWc.RemoveWater(litres);
             toWc.AddWater(transfer);
         }
+
+        public static List<Thing> WaterContainersInRoom(IntVec3 position)
+        {
+            var containers = new List<Thing>();
+
+            Room room = RoomQuery.RoomAt(position);
+            if (room == null)
+            {
+                return containers;
+            }
+
+            foreach (Region region in room.Regions)
+            {
+                // Check how much water is available here.
+                foreach (Thing thing in region.ListerThings.ThingsInGroup(ThingRequestGroup.BuildingArtificial))
+                {
+                    var wc = thing.TryGetComp<CompWaterContainer>();
+                    if (wc != null)
+                    {
+                        containers.Add(thing);
+                    }
+                }
+            }
+
+            return containers;
+        }
     }
 }
