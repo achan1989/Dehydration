@@ -78,6 +78,24 @@ namespace achan1989.dehydration
                 {
                     Log.Error("Dehydration can't find main behaviours ThinkTree to inject into.");
                 }
+
+                ThinkNode mainPrisonerBehaviours = null;
+                try
+                {
+                    mainPrisonerBehaviours = humanTree.thinkRoot.subNodes.Find(
+                        node => node is ThinkNode_ConditionalPrisoner).subNodes.Find(
+                            node => node is ThinkNode_PrioritySorter);
+                }
+                catch { }
+                if (mainPrisonerBehaviours != null)
+                {
+                    InjectGetWaterThink(mainPrisonerBehaviours);
+                }
+                else
+                {
+                    Log.Error("Dehydration can't find main prisoner behaviours ThinkTree to inject into.");
+                }
+                
             }
             else
             {
