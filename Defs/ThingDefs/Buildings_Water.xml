@@ -15,6 +15,9 @@
             <compClass>CompForbiddable</compClass>
         </li>
     </comps>
+    <!-- All water buildings should probably check social properness, so you don't
+         get people drinking and hauling from/to inappropriate water containers. -->
+    <socialPropernessMatters>true</socialPropernessMatters>
 </ThingDef>
 
 <ThingDef Name="WellBase" ParentName="BuildingBase" Abstract="True">

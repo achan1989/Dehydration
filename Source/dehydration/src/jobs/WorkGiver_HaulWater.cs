@@ -32,7 +32,7 @@ namespace achan1989.dehydration
             var wc = t.TryGetComp<CompWaterContainer>();
             if (wc == null) { return false; }
 
-            return wc.ManuallyFillable && wc.FreeSpaceLitres >= MinimumFill;
+            return wc.ManuallyFillable && wc.FreeSpaceLitres >= MinimumFill && t.IsSociallyProper(pawn);
         }
 
         public override Job JobOnThing(Pawn pawn, Thing t)

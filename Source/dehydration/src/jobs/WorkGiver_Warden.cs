@@ -72,6 +72,9 @@ namespace achan1989.dehydration
                         if (haulWorkGiver != null)
                         {
                             // Use the existing WorkGiver for water hauling.
+                            // Note that the normal check for social properness happens in
+                            // HasJobOnThing(), so this warden bypasses the normal inability to
+                            // haul to containers inside a prison.
                             return haulWorkGiver.JobOnThing(warden, haulTo);
                         }
                     }
