@@ -77,16 +77,26 @@ namespace achan1989.dehydration
 				switch (this.CurCategory)
 				{
 				case HydratedCategory.Hydrated:
-					return intervalNeed;
+                    break;
 				case HydratedCategory.Thirsty:
-                    return intervalNeed * 0.85f;
+                    intervalNeed *= 0.85f;
+                    break;
 				case HydratedCategory.UrgentlyThirsty:
-                    return intervalNeed * 0.5f;
+                    intervalNeed *= 0.5f;
+                    break;
 				case HydratedCategory.Dehydrated:
-                    return intervalNeed * 0.25f;
+                    intervalNeed *= 0.25f;
+                    break;
 				default:
                     throw new NotImplementedException();
 				}
+
+                // If pawn is asleep, water need is halved.
+                if (!this.pawn.Awake())
+                {
+                    intervalNeed *= 0.5f;
+                }
+                return intervalNeed;
 			}
 		}
 
