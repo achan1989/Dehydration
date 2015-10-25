@@ -56,6 +56,7 @@
     <Compile Include="src\comps\CompWaterDrinker.cs" />
     <Compile Include="src\comps\CompWaterSource.cs" />
     <Compile Include="src\HydratedCategory.cs" />
+    <Compile Include="src\IncidentWorker_WaterLeak.cs" />
     <Compile Include="src\jobs\JobDriver_GetWater.cs" />
     <Compile Include="src\jobs\JobDriver_HaulWater.cs" />
     <Compile Include="src\jobs\JobDriver_PackWater.cs" />

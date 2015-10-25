@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<IncidentDef>
+    <defName>Dehydration_WaterLeak</defName>
+    <workerClass>achan1989.dehydration.IncidentWorker_WaterLeak</workerClass>
+    <letterLabel>Water leak</letterLabel>
+    <letterText>One of your water cisterns has sprung a leak.</letterText>
+    <letterType>BadNonUrgent</letterType>
+    <chance>1.2</chance>
+    <minRefireDays>15</minRefireDays>
+</IncidentDef>
+
+</Defs>
