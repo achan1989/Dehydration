@@ -23,6 +23,9 @@
 <ThingDef Name="WellBase" ParentName="BuildingBase" Abstract="True">
     <tickerType>Rare</tickerType>
     <terrainAffordanceNeeded>Diggable</terrainAffordanceNeeded>
+    <placeWorkers>
+        <li>achan1989.dehydration.PlaceWorker_ValidForWell</li>
+    </placeWorkers>
 </ThingDef>
 
 
