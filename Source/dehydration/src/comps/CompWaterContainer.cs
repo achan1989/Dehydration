@@ -25,6 +25,10 @@ namespace achan1989.dehydration
         /// If manually fillable, whether the container should always be filled to capacity.
         /// </summary>
         public bool alwaysFillMax = false;
+        /// <summary>
+        /// How fast this collects rainwater. Base rate is one per tile. Set to zero to disable.
+        /// </summary>
+        public float rainWaterCollectionRate = 0f;
 
         public CompPropertiesWaterContainer() : base()
         {
@@ -43,6 +47,10 @@ namespace achan1989.dehydration
         private readonly int defaultFillageIndex = 4;
         private int fillageIndex = -1;
         private StoragePriority priorityInt = StoragePriority.Normal;
+        /// <summary>
+        /// The litres of rainwater collected in one tick by one cell collecting at the max rate.
+        /// </summary>
+        private static readonly float baseRainwaterCollectionPerTick = 1.4f; // One cell collects about 7L an hour.
 
         new public CompPropertiesWaterContainer props;
 
@@ -167,6 +175,33 @@ namespace achan1989.dehydration
             Scribe_Values.LookValue<float>(ref _storedLitres, "storedLitres");
             Scribe_Values.LookValue<int>(ref fillageIndex, "fillageIndex", defaultFillageIndex);
             Scribe_Values.LookValue<StoragePriority>(ref priorityInt, "priority", StoragePriority.Normal);
+        }
+
+        public override void CompTickRare()
+        {
+            base.CompTickRare();
+
+            Log.Message("CompWaterContainer tick on " + parent.Label);
+            Log.Message(string.Format("props.rainWaterCollectionRate = {0} ({1})", props.rainWaterCollectionRate, props.rainWaterCollectionRate == 0 ? "is zero" : "is not zero"));
+            Log.Message(string.Format("RainRate = {0}", Find.WeatherManager.RainRate));
+            if (props.rainWaterCollectionRate > 0 && Find.WeatherManager.RainRate > 0.01f)
+            {
+                Log.Message("Raining");
+                // Assume that each cell of a building is equally responsible for collecting water.
+                // Calculate water collection rate based on how many cells of the building are
+                // exposed to the sky.
+                var thingCells = GenAdj.CellsOccupiedBy(this.parent);
+                int numCells = thingCells.Count();
+                int numCollecting = thingCells.Count(pos => !pos.Roofed());
+                Log.Message(numCollecting.ToString() + " cells collecting");
+                float collectionRate = props.rainWaterCollectionRate / numCells * numCollecting;
+
+                float collectedLitres = Find.WeatherManager.RainRate * collectionRate * baseRainwaterCollectionPerTick;
+                Log.Message(string.Format("Collecting {0}L", collectedLitres));
+                if (collectedLitres + StoredLitres > CapacityLitres) { collectedLitres = props.capacity - StoredLitres; }
+                Log.Message(string.Format("Capped to {0}L", collectedLitres));
+                AddWater(collectedLitres);
+            }
         }
 
         public void AddWater(float litres)

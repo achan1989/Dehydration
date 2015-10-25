@@ -6,7 +6,6 @@ Bulk water storage gets a leak.
 Water Sources
 -------------
 Condensers.
-Rainfall collection.
 Melt snow.
 Get some water from food?
 Desalination plant, if salt water ever becomes a thing.

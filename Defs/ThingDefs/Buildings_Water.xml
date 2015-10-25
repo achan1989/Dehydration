@@ -149,18 +149,20 @@
     <defName>Dehydration_WaterCistern</defName>
     <label>cistern</label>
     <thingClass>achan1989.dehydration.Building_BulkWaterStore</thingClass>
-    <Description>Bulk storage of water. People can also drink from this.</Description>
+    <Description>Bulk storage of water. If built outside, it can collect rainwater. People can also drink from this.</Description>
     <graphicData>
         <texPath>Things/Buildings/WaterCistern.tex</texPath>
         <graphicClass>Graphic_Single</graphicClass>
         <drawSize>(2,1)</drawSize>
     </graphicData>
     <Size>(2,1)</Size>
+    <tickerType>Rare</tickerType>
     <comps>
         <li Class="achan1989.dehydration.CompPropertiesWaterContainer">
             <compClass>achan1989.dehydration.CompWaterContainer</compClass>
             <capacity>300.0</capacity>
             <needsToolUser>true</needsToolUser>
+            <rainWaterCollectionRate>2</rainWaterCollectionRate>
         </li>
     </comps>
     <AltitudeLayer>BuildingTall</AltitudeLayer>
