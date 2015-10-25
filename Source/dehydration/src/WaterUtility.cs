@@ -138,7 +138,10 @@ namespace achan1989.dehydration
 
             var traverse = TraverseParms.For(getter, Danger.Deadly, TraverseMode.ByPawn);
             Func<TerrainDef, bool> terrainPred = td =>
-                td.defName.Equals("WaterDeep") || td.defName.Equals("WaterShallow");
+            {
+                var validTerrain = new List<string>() { "WaterDeep", "WaterShallow", "Marsh" };
+                return validTerrain.Contains(td.defName);
+            };
             return terrainFinder.NearestTerrainOfType(near.Value, terrainPred, traverse);
         }
 
