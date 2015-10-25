@@ -14,7 +14,6 @@ Desalination plant, if salt water ever becomes a thing.
 
 Mechanics
 ---------
-INJURED PRISONERS AND COLONISTS NEED TO DRINK.  Jobs to give water to others.
 Custom CompWaterDrinker on some animals eg camels.
 Animals should probably have a wider water search radius, and remember where they drank from in the past.
 Reduced water need while asleep.

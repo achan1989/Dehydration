@@ -10,6 +10,7 @@ namespace achan1989.dehydration
 {
     public class JobDriver_HaulWater : JobDriver
     {
+        // TODO: very similar to JobDriver_WaterPatient, could split out a common subset.
         protected override IEnumerable<Toil> MakeNewToils()
         {
             // TargetA = from

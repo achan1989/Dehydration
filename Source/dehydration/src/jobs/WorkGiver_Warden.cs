@@ -12,6 +12,7 @@ namespace achan1989.dehydration
     {
         private readonly List<JobDef> CriticalJobDefs;
         private readonly WorkGiverDef HaulWaterWorkGiverDef;
+        private readonly WorkGiverDef WaterPatientWorkGiverDef;
 
         public WorkGiver_Warden() : base()
         {
@@ -22,6 +23,7 @@ namespace achan1989.dehydration
             };
 
             HaulWaterWorkGiverDef = DefDatabase<WorkGiverDef>.GetNamed("Dehydration_HaulWater");
+            WaterPatientWorkGiverDef = DefDatabase<WorkGiverDef>.GetNamed("Dehydration_DoctorWater");
         }
 
         public override Job JobOnThing(Pawn pawn, Thing t)
@@ -58,9 +60,12 @@ namespace achan1989.dehydration
                 {
                     if (warden.CanReserve(prisoner, 1))
                     {
-                        // TODO: look for suitable water source, and give water to patient.
-                        // return new Job(blah)
-                        return null;
+                        var waterPatientWorkGiver = WaterPatientWorkGiverDef.Worker as WorkGiver_WaterPatient;
+                        if (waterPatientWorkGiver != null)
+                        {
+                            // Use the existing WorkGiver for doctors giving water to patients.
+                            return waterPatientWorkGiver.JobOnThing(warden, prisoner);
+                        }
                     }
                 }
                 else if (!WaterAvailableInRoomTo(prisoner))
