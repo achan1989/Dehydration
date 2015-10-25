@@ -81,7 +81,7 @@
         <li Class="achan1989.dehydration.CompPropertiesWaterSource">
             <compClass>achan1989.dehydration.CompWaterSource</compClass>
             <startsWith>20.0</startsWith>
-            <capacity>400.0</capacity>
+            <capacity>100.0</capacity>
             <regenPerDay>40.0</regenPerDay>
             <manuallyFillable>false</manuallyFillable>
         </li>
@@ -136,11 +136,45 @@
         <MaxHitPoints>120</MaxHitPoints>
         <Flammability>0.4</Flammability>
     </statBases>
-    <costStuffCount>40</costStuffCount>
+    <costStuffCount>30</costStuffCount>
     <stuffCategories>
       <li>Metallic</li>
       <li>Woody</li>
       <li>Stony</li>
+    </stuffCategories>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+</ThingDef>
+
+<ThingDef ParentName="BuildingBase">
+    <defName>Dehydration_WaterCistern</defName>
+    <label>cistern</label>
+    <thingClass>achan1989.dehydration.Building_BulkWaterStore</thingClass>
+    <Description>Bulk storage of water. People can also drink from this.</Description>
+    <graphicData>
+        <texPath>Things/Buildings/WaterCistern.tex</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+        <drawSize>(2,1)</drawSize>
+    </graphicData>
+    <Size>(2,1)</Size>
+    <comps>
+        <li Class="achan1989.dehydration.CompPropertiesWaterContainer">
+            <compClass>achan1989.dehydration.CompWaterContainer</compClass>
+            <capacity>300.0</capacity>
+            <needsToolUser>true</needsToolUser>
+        </li>
+    </comps>
+    <AltitudeLayer>BuildingTall</AltitudeLayer>
+    <fillPercent>0.4</fillPercent>
+    <passability>PassThroughOnly</passability>
+    <pathCost>70</pathCost>
+    <statBases>
+        <WorkToMake>600</WorkToMake>
+        <MaxHitPoints>150</MaxHitPoints>
+        <Flammability>0.1</Flammability>
+    </statBases>
+    <costStuffCount>40</costStuffCount>
+    <stuffCategories>
+      <li>Metallic</li>
     </stuffCategories>
     <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
 </ThingDef>
