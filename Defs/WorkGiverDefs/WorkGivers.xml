@@ -26,4 +26,18 @@
     </requiredCapacities>
 </WorkGiverDef>
 
+<!-- Another Doctor task for watering patients. -->
+<WorkGiverDef>
+    <defName>Dehydration_DoctorWater</defName>
+    <giverClass>achan1989.dehydration.WorkGiver_WaterPatient</giverClass>
+    <workType>Doctor</workType>
+    <verb>water</verb>
+    <gerund>watering</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <!-- Priority is just above food. -->
+    <priorityInType>51</priorityInType>
+</WorkGiverDef>
+
 </WorkGivers>

@@ -7,4 +7,10 @@
     <reportString>Hauling water from TargetA to TargetB.</reportString>
 </JobDef>
 
+<JobDef>
+    <defName>Dehydration_WaterPatientJob</defName>
+    <driverClass>achan1989.dehydration.JobDriver_WaterPatient</driverClass>
+    <reportString>Giving water to TargetB.</reportString>
+</JobDef>
+
 </JobDefs>
