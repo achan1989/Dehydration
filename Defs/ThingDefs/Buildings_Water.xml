@@ -29,7 +29,7 @@
 <ThingDef ParentName="WellBase">
     <defName>ImprovisedWell</defName>
     <label>improvised well</label>
-    <Description>A rudimentary well that provides a small amount of water.</Description>
+    <Description>A rudimentary well, little more than a shallow hole in the ground. Provides a small amount of water.</Description>
     <graphicData>
         <texPath>Things/Buildings/ImprovisedWell.tex</texPath>
         <graphicClass>Graphic_Single</graphicClass>
@@ -40,14 +40,14 @@
         <li Class="achan1989.dehydration.CompPropertiesWaterSource">
             <compClass>achan1989.dehydration.CompWaterSource</compClass>
             <startsWith>10.0</startsWith>
-            <capacity>300.0</capacity>
-            <regenPerDay>30.0</regenPerDay>
+            <capacity>50.0</capacity>
+            <regenPerDay>20.0</regenPerDay>
             <manuallyFillable>false</manuallyFillable>
         </li>
     </comps>
     <AltitudeLayer>Floor</AltitudeLayer>
     <fillPercent>0.1</fillPercent>
-    <PathCost>40</PathCost>
+    <PathCost>400</PathCost>
     <passability>PassThroughOnly</passability>
     <statBases>
         <WorkToMake>6000</WorkToMake>
@@ -62,6 +62,50 @@
     <filthLeaving>RockRubble</filthLeaving>
     <repairEffect>Mine</repairEffect>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+</ThingDef>
+
+<ThingDef ParentName="WellBase">
+    <defName>BrickWell</defName>
+    <label>brick-lined well</label>
+    <Description>A deep well lined with bricks. Provides a good amount of water.</Description>
+    <graphicData>
+        <texPath>Things/Buildings/BrickWell.tex</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+        <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <Size>(2,2)</Size>
+    <comps>
+        <li Class="achan1989.dehydration.CompPropertiesWaterSource">
+            <compClass>achan1989.dehydration.CompWaterSource</compClass>
+            <startsWith>20.0</startsWith>
+            <capacity>400.0</capacity>
+            <regenPerDay>40.0</regenPerDay>
+            <manuallyFillable>false</manuallyFillable>
+        </li>
+    </comps>
+    <AltitudeLayer>Floor</AltitudeLayer>
+    <fillPercent>0.1</fillPercent>
+    <PathCost>400</PathCost>
+    <passability>PassThroughOnly</passability>
+    <statBases>
+        <WorkToMake>10000</WorkToMake>
+        <MaxHitPoints>500</MaxHitPoints>
+        <Flammability>0.0</Flammability>
+    </statBases>
+    <CostList>
+      <Steel>30</Steel>
+    </CostList>
+    <costStuffCount>200</costStuffCount>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <building>
+        <expandHomeArea>true</expandHomeArea>
+    </building>
+    <soundImpactDefault>BulletImpactGround</soundImpactDefault>
+    <filthLeaving>RockRubble</filthLeaving>
+    <repairEffect>Mine</repairEffect>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
 </ThingDef>
 
 <ThingDef ParentName="BuildingBase">

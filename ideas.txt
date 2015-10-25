@@ -5,7 +5,6 @@ Bulk water storage gets a leak, once bulk storage is a thing.
 
 Water Sources
 -------------
-Not-improvised well.
 Condensers.
 Rainfall collection.
 Melt snow.
@@ -20,7 +19,7 @@ Reduced water need while asleep.
 Water need depends on temperature, sun exposure, maybe current job?
 Plants need watering?
 Salt water.  The map generator for beaches would spawn salt water instead of fresh water, not drinkable without desalination.
-Bulk water storage.  Pumps?
+Bulk water storage (cistern).  Pumps?
 Digging canals?  Water in lakes (not edge-connected) eventually runs out if you canal too much?  Seems tricky...
 
 Health
