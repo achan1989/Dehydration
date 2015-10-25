@@ -27,7 +27,7 @@ namespace achan1989.dehydration
             {
                 yield return Toils_Reserve.Reserve(TargetIndex.C);
                 yield return Toils_Goto.GotoThing(TargetIndex.C, PathEndMode.ClosestTouch).FailOnDespawnedOrForbidden(TargetIndex.C);
-                yield return PickUpTool(TargetIndex.C);
+                yield return Toils_General.PickUpTool(TargetIndex.C);
             }
             // If the tool is in our inventory, carry it.
             else
@@ -103,26 +103,6 @@ namespace achan1989.dehydration
                         actor.CurJob.SetTarget(TargetIndex.C, droppedTool);
                     }
                 }
-            };
-            return toil;
-        }
-
-        private Toil PickUpTool(TargetIndex toolInd)
-        {
-            Toil toil = new Toil();
-            toil.defaultCompleteMode = ToilCompleteMode.Instant;
-            toil.initAction = delegate
-            {
-                Pawn actor = toil.actor;
-                Job curJob = actor.jobs.curJob;
-                Thing tool = curJob.GetTarget(toolInd).Thing;
-                actor.carrier.TryStartCarry(tool);
-                if (tool != actor.carrier.CarriedThing && Find.Reservations.FirstReserverOf(tool, actor.Faction) == actor)
-                {
-                    Log.Error("Carried tool != target tool");
-                    Find.Reservations.Release(tool, actor);
-                }
-                curJob.targetC = actor.carrier.CarriedThing;
             };
             return toil;
         }

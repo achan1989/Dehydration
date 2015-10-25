@@ -31,6 +31,26 @@ namespace achan1989.dehydration
             return toil;
         }
 
+        public static Toil PickUpTool(TargetIndex toolInd)
+        {
+            Toil toil = new Toil();
+            toil.defaultCompleteMode = ToilCompleteMode.Instant;
+            toil.initAction = delegate
+            {
+                Pawn actor = toil.actor;
+                Job curJob = actor.jobs.curJob;
+                Thing tool = curJob.GetTarget(toolInd).Thing;
+                actor.carrier.TryStartCarry(tool);
+                if (tool != actor.carrier.CarriedThing && Find.Reservations.FirstReserverOf(tool, actor.Faction) == actor)
+                {
+                    Log.Error("Carried tool != target tool");
+                    Find.Reservations.Release(tool, actor);
+                }
+                curJob.targetC = actor.carrier.CarriedThing;
+            };
+            return toil;
+        }
+
         public static Toil FaceThing(TargetIndex thingInd)
         {
             var toil = new Toil();
