@@ -44,6 +44,7 @@ namespace achan1989.dehydration
             InjectHumanThinkTrees();
             InjectAnimalThinkTrees();
             InjectCompWaterDrinker();
+            InjectCustomPlantClass();
         }
 
         public void FixedUpdate() { }
@@ -276,6 +277,21 @@ namespace achan1989.dehydration
                     thing.comps.Add(MakeWaterDrinkerComp(thing));
                 }
 	        }
+        }
+
+        /// <summary>
+        /// Make all plants use the dehydration Plant class.
+        /// </summary>
+        private void InjectCustomPlantClass()
+        {
+            foreach (ThingDef thing in DefDatabase<ThingDef>.AllDefs)
+            {
+                if (thing.thingClass.Equals(typeof(RimWorld.Plant)))
+                {
+                    Log.Message(string.Format("Converting {0} to custom Plant class.", thing.defName));
+                    thing.thingClass = typeof(achan1989.dehydration.Plant);
+                }
+            }
         }
     }
 }

@@ -75,6 +75,7 @@
     <Compile Include="src\StoragePriority_Extensions.cs" />
     <Compile Include="src\things\Apparel_WithCompGizmos.cs" />
     <Compile Include="src\things\Building_BulkWaterStore.cs" />
+    <Compile Include="src\things\Plant.cs" />
     <Compile Include="src\ThoughtWorker_Water.cs" />
     <Compile Include="src\TerrainFinder.cs" />
     <Compile Include="src\WaterUtility.cs" />
