@@ -45,6 +45,7 @@ namespace achan1989.dehydration
             InjectAnimalThinkTrees();
             InjectCompWaterDrinker();
             InjectCustomPlantClass();
+            InjectCustomSowJob();
         }
 
         public void FixedUpdate() { }
@@ -292,6 +293,16 @@ namespace achan1989.dehydration
                     thing.thingClass = typeof(achan1989.dehydration.Plant);
                 }
             }
+        }
+
+        /// <summary>
+        /// Make sow jobs use my custom JobDriver.
+        /// </summary>
+        private void InjectCustomSowJob()
+        {
+            var sowJob = DefDatabase<JobDef>.GetNamed("Sow");
+            sowJob.driverClass = typeof(JobDriver_PlantSow);
+            Log.Message("Updated the Sow job.");
         }
     }
 }

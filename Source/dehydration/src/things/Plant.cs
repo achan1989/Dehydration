@@ -32,8 +32,24 @@ namespace achan1989.dehydration
         /// </summary>
         protected int unlitTicks;
         protected int waterlessTicks = 0;
-        protected bool initialised = false;
 
+
+        public void Sown()
+        {
+            this.growth = 0f;
+            this.sown = true;
+            // Sown plants start needing some water.
+            this.waterlessTicks = (int)Mathf.Lerp((float)MinTicksForDehydrated, (float)MaxTicksForDehydrated, 0.5f);
+        }
+
+        public override void SpawnSetup()
+        {
+            base.SpawnSetup();
+            
+            // Wild plants can start fully watered to fully dehydrated.  If this plant is actually
+            // a sown plant, this will be reset later in Sown().
+            this.waterlessTicks = Rand.Range(0, MaxTicksForDehydrated);
+        }
         
         protected internal bool Resting
         {
@@ -224,29 +240,10 @@ namespace achan1989.dehydration
             Scribe_Values.LookValue<int>(ref this.unlitTicks, "unlitTicks", 0, false);
             // Stuff specific to this child class.
             Scribe_Values.LookValue<int>(ref waterlessTicks, "waterlessTicks", 0);
-            Scribe_Values.LookValue<bool>(ref initialised, "initialised", true);
         }
 
         public override void TickLong()
         {
-            // Can't use PostSpawn() because of how the 'sown' field is set in the sowing job.
-            // TODO: this is pretty crap (can take up to 30 seconds to init), modify the sowing job to init the plant as sown.
-            if (!this.initialised)
-            {
-                this.initialised = true;
-
-                if (this.sown)
-                {
-                    // Sown plants start needing some water.
-                    this.waterlessTicks = (int)Mathf.Lerp((float)MinTicksForDehydrated, (float)MaxTicksForDehydrated, 0.5f);
-                }
-                else
-                {
-                    // Wild plants can start fully watered to fully dehydrated.
-                    this.waterlessTicks = Rand.Range(0, MaxTicksForDehydrated);
-                }
-            }
-
             CheckTemperatureMakeLeafless();
             if (GenPlant.GrowthSeasonNow(base.Position))
             {
