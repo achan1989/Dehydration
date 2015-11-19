@@ -1,20 +1,24 @@
 Events
 -------
-Toxic cloud/rain causes wells to stop producing.
+Toxic cloud/rain causes wells and cisterns to stop producing.
 
 Water Sources
 -------------
-Condensers.
-Melt snow.
-Get some water from food?
+Condensers?
+Melt snow?
 Desalination plant, if salt water ever becomes a thing.
 
 Mechanics
 ---------
+Fix errors to do with ThinkNodes when a save game is loaded.  "Animal could not find ThinkNode with save key n."  and  "Animalnnnn with job Dehydration_DrinkJob A=(110,0,98) tried to get curToilIndex=7 but only has 5 toils"
+Fix slow water hauling, job speeds in general?  WorkGiver_HaulWater locomotionUrgency
+Replace hard-coded tick numbers with ones based off GenTicks and GenDate
 Water containers leak when damaged.
 Custom CompWaterDrinker on some animals eg camels.
 Animals should probably have a wider water search radius, and remember where they drank from in the past.
 Water need depends on temperature, sun exposure, maybe current job?
+Faster firefighting with water buckets.
+Nicer non-instant toils.  Effects should happen over time or at the end -- better than instantly at the start and then standing around doing "nothing" for a while.
 Salt water.  The map generator for beaches would spawn salt water instead of fresh water, not drinkable without desalination.
 Water network, like electricity?
 Digging canals?  Water in lakes (not edge-connected) eventually runs out if you canal too much?  Seems tricky...
@@ -29,4 +33,5 @@ Still-suits!
 
 Misc
 -----
+Bathtub as joy item.
 Generic def injector?
