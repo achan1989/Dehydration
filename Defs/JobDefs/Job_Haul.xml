@@ -13,4 +13,10 @@
     <reportString>Giving water to TargetB.</reportString>
 </JobDef>
 
+<JobDef>
+    <defName>Dehydration_WaterPlantJob</defName>
+    <driverClass>achan1989.dehydration.JobDriver_WaterPlant</driverClass>
+    <reportString>Watering TargetB.</reportString>
+</JobDef>
+
 </JobDefs>

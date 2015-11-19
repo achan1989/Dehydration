@@ -62,11 +62,13 @@
     <Compile Include="src\jobs\JobDriver_PackWater.cs" />
     <Compile Include="src\jobs\JobDriver_PlantSow.cs" />
     <Compile Include="src\jobs\JobDriver_WaterPatient.cs" />
+    <Compile Include="src\jobs\JobDriver_WaterPlant.cs" />
     <Compile Include="src\jobs\JobGiver_ExitMapWalkRandomInterruptable.cs" />
     <Compile Include="src\jobs\JobGiver_GetWater.cs" />
     <Compile Include="src\jobs\JobGiver_PackWater.cs" />
     <Compile Include="src\jobs\Toils_General.cs" />
     <Compile Include="src\jobs\Toils_Water.cs" />
+    <Compile Include="src\jobs\WorkGiver_GrowerWater.cs" />
     <Compile Include="src\jobs\WorkGiver_HaulWater.cs" />
     <Compile Include="src\jobs\WorkGiver_Warden.cs" />
     <Compile Include="src\jobs\WorkGiver_WaterPatient.cs" />

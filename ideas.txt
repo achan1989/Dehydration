@@ -15,7 +15,6 @@ Water containers leak when damaged.
 Custom CompWaterDrinker on some animals eg camels.
 Animals should probably have a wider water search radius, and remember where they drank from in the past.
 Water need depends on temperature, sun exposure, maybe current job?
-Plants need watering?
 Salt water.  The map generator for beaches would spawn salt water instead of fresh water, not drinkable without desalination.
 Water network, like electricity?
 Digging canals?  Water in lakes (not edge-connected) eventually runs out if you canal too much?  Seems tricky...

@@ -40,4 +40,20 @@
     <priorityInType>51</priorityInType>
 </WorkGiverDef>
 
+<!-- Another Grower task for watering plants. -->
+<WorkGiverDef>
+    <defName>Dehydration_GrowerWater</defName>
+    <giverClass>achan1989.dehydration.WorkGiver_GrowerWater</giverClass>
+    <workType>Growing</workType>
+    <!-- Less important than sowing. -->
+    <priorityInType>40</priorityInType>
+    <verb>water</verb>
+    <gerund>watering</gerund>
+    <scanThings>false</scanThings>
+    <scanCells>true</scanCells>
+    <requiredCapacities>
+        <li>Manipulation</li>
+    </requiredCapacities>
+</WorkGiverDef>
+
 </WorkGivers>

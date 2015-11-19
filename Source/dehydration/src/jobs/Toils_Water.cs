@@ -79,7 +79,8 @@ namespace achan1989.dehydration
             return toil;
         }
 
-        public static Toil TransferWater(CompWaterContainer fromWC, CompWaterContainer toWC, float maxLitres = -1f)
+        public static Toil TransferWater(CompWaterContainer fromWC, CompWaterContainer toWC,
+            float maxLitres = -1f, float minInToWC = 0f)
         {
             var toil = new Toil();
             toil.defaultCompleteMode = ToilCompleteMode.Delay;
@@ -99,6 +100,37 @@ namespace achan1989.dehydration
                 }
 
                 WaterUtility.TransferWater(fromWC, toWC, maxLitres);
+
+                if (toWC.StoredLitres < minInToWC)
+                {
+                    toil.actor.jobs.EndCurrentJob(JobCondition.Incompletable);
+                    return;
+                }
+            };
+            return toil;
+        }
+
+        public static Toil WaterPlant(Plant plant, CompWaterContainer fromWC, float waterLitres)
+        {
+            var toil = new Toil();
+            toil.defaultCompleteMode = ToilCompleteMode.Delay;
+            toil.defaultDuration = 180;
+            toil.initAction = delegate
+            {
+                if (fromWC == null || plant == null)
+                {
+                    Log.Error("WaterPlant has a null parameter.");
+                    toil.actor.jobs.curDriver.EndJobWith(JobCondition.Errored);
+                    return;
+                }
+
+                if (fromWC.StoredLitres < waterLitres)
+                {
+                    toil.actor.jobs.curDriver.EndJobWith(JobCondition.Incompletable);
+                }
+
+                fromWC.RemoveWater(waterLitres);
+                plant.Watered();
             };
             return toil;
         }
