@@ -181,25 +181,18 @@ namespace achan1989.dehydration
         {
             base.CompTickRare();
 
-            Log.Message("CompWaterContainer tick on " + parent.Label);
-            Log.Message(string.Format("props.rainWaterCollectionRate = {0} ({1})", props.rainWaterCollectionRate, props.rainWaterCollectionRate == 0 ? "is zero" : "is not zero"));
-            Log.Message(string.Format("RainRate = {0}", Find.WeatherManager.RainRate));
             if (props.rainWaterCollectionRate > 0 && Find.WeatherManager.RainRate > 0.01f)
             {
-                Log.Message("Raining");
                 // Assume that each cell of a building is equally responsible for collecting water.
                 // Calculate water collection rate based on how many cells of the building are
                 // exposed to the sky.
                 var thingCells = GenAdj.CellsOccupiedBy(this.parent);
                 int numCells = thingCells.Count();
                 int numCollecting = thingCells.Count(pos => !pos.Roofed());
-                Log.Message(numCollecting.ToString() + " cells collecting");
                 float collectionRate = props.rainWaterCollectionRate / numCells * numCollecting;
 
                 float collectedLitres = Find.WeatherManager.RainRate * collectionRate * baseRainwaterCollectionPerTick;
-                Log.Message(string.Format("Collecting {0}L", collectedLitres));
                 if (collectedLitres + StoredLitres > CapacityLitres) { collectedLitres = props.capacity - StoredLitres; }
-                Log.Message(string.Format("Capped to {0}L", collectedLitres));
                 AddWater(collectedLitres);
             }
         }
