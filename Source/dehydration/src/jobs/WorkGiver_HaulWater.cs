@@ -127,10 +127,7 @@ namespace achan1989.dehydration
 
         private Job MakeHaulJob(TargetInfo fromTarget, TargetInfo toTarget, TargetInfo toolTarget)
         {
-            return new Job(DefDatabase<JobDef>.GetNamed(HaulDefName), fromTarget, toTarget, toolTarget)
-            {
-                locomotionUrgency = LocomotionUrgency.Walk
-            };
+            return new Job(DefDatabase<JobDef>.GetNamed(HaulDefName), fromTarget, toTarget, toolTarget);
         }
     }
 }

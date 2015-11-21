@@ -56,10 +56,7 @@ namespace achan1989.dehydration
 
         private Job MakePackWaterJob(TargetInfo targetFrom, TargetInfo targetTo)
         {
-            return new Job(DefDatabase<JobDef>.GetNamed(PackJobDefName), targetFrom, targetTo)
-            {
-                locomotionUrgency = LocomotionUrgency.Walk
-            };
+            return new Job(DefDatabase<JobDef>.GetNamed(PackJobDefName), targetFrom, targetTo);
         }
     }
 }

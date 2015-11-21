@@ -11,7 +11,6 @@ Desalination plant, if salt water ever becomes a thing.
 Mechanics
 ---------
 Fix errors to do with ThinkNodes when a save game is loaded.  "Animal could not find ThinkNode with save key n."  and  "Animalnnnn with job Dehydration_DrinkJob A=(110,0,98) tried to get curToilIndex=7 but only has 5 toils"
-Fix slow water hauling, job speeds in general?  WorkGiver_HaulWater locomotionUrgency
 Replace hard-coded tick numbers with ones based off GenTicks and GenDate
 Water containers leak when damaged.
 Custom CompWaterDrinker on some animals eg camels.
