@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<!-- Time based. -->
+
+<ConceptDef>
+    <defName>Dehydration_WaterskinsCanteens</defName>
+    <label>Waterskins and Canteens</label>
+    <priority>5</priority>
+    <alertDisplay>true</alertDisplay>
+    <minSecondsSinceLesson>300</minSecondsSinceLesson>
+    <helpTexts>
+        <li>Colonists will often have to stop what they are doing to fetch a drink of water.\n\nYou can reduce this wasted time by making waterskins or canteens for your colonists, so they can always carry some water around with them.\n\nDo this at a tailor's workbench or smithing bench.</li>
+    </helpTexts>
+</ConceptDef>
+
+<ConceptDef>
+    <defName>Dehydration_WaterStorage</defName>
+    <label>Water storage</label>
+    <priority>4</priority>
+    <alertDisplay>true</alertDisplay>
+    <minSecondsSinceLesson>300</minSecondsSinceLesson>
+    <helpTexts>
+        <li>Save time by storing water near places where it is needed -- build cisterns or water troughs.</li>
+    </helpTexts>
+</ConceptDef>
+
+</Defs>

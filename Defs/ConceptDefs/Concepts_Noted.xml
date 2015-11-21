@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<ConceptDef>
+    <defName>Dehydration_WaterIntroConcept</defName>
+    <label>Things need water</label>
+    <priority>90</priority>
+    <helpTexts>
+        <li>Humans and animals need water to survive, and plants need water to grow quickly.\n\nYou may be able to get water from the environment via ponds or rain. Otherwise you can construct various buildings that provide a source of water.</li>
+    </helpTexts>
+</ConceptDef>
+
+</Defs>
