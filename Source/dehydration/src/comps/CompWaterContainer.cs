@@ -167,6 +167,14 @@ namespace achan1989.dehydration
             }
 
             if (fillageIndex == -1) { fillageIndex = defaultFillageIndex; }
+
+            // Slightly hacky and non-accurate way of determining when the player has made a bucket.
+            if (this.parent.def.defName.Equals("Dehydration_Bucket"))
+            {
+                ConceptDatabase.KnowledgeDemonstrated(DefDatabase<ConceptDef>.GetNamedSilentFail("Dehydration_HaulWaterTool"),
+                                                      KnowledgeAmount.Total);
+            }
+            // Ditto for waterskins and canteens.
             if (this.parent.def.defName.StartsWith("Apparel_Waterskin_") ||
                 this.parent.def.defName.StartsWith("Apparel_Canteen_"))
             {

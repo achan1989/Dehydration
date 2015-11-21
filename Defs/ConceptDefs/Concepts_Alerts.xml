@@ -27,4 +27,15 @@
     </helpTexts>
 </ConceptDef>
 
+<ConceptDef>
+    <defName>Dehydration_HaulWaterTool</defName>
+    <label>Hauling water</label>
+    <priority>6</priority>
+    <alertDisplay>true</alertDisplay>
+    <needsOpportunity>true</needsOpportunity>
+    <helpTexts>
+        <li>Colonists need buckets to haul water for growing, looking after patients and prisoners, etc.\n\nMake some buckets at a smithing bench or stonecutter's table.</li>
+    </helpTexts>
+</ConceptDef>
+
 </Defs>

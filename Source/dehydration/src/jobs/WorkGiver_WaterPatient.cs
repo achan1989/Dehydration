@@ -87,6 +87,8 @@ namespace achan1989.dehydration
                 tool = WaterUtility.NearestHaulingTool(pawn);
                 if (tool == null)
                 {
+                    ConceptDecider.TeachOpportunity(DefDatabase<ConceptDef>.GetNamedSilentFail("Dehydration_HaulWaterTool"),
+                                                    OpportunityType.Important);
                     JobFailReason.Is("nothing to haul with");
                     return null;
                 }
