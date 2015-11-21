@@ -216,8 +216,11 @@ namespace achan1989.dehydration
             StoredLitres += litres;
             if (StoredLitres > CapacityLitres)
             {
-                Log.Error(string.Format("WaterContainer + {0} litres = {1}, capacity {2}", litres,
-                    StoredLitres, CapacityLitres));
+                if (StoredLitres > CapacityLitres + 0.001f)
+                {
+                    Log.Error(string.Format("WaterContainer + {0} litres = {1}, capacity {2}", litres,
+                        StoredLitres, CapacityLitres));
+                }
                 StoredLitres = CapacityLitres;
             }
         }

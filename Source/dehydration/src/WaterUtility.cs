@@ -171,8 +171,11 @@ namespace achan1989.dehydration
         {
             if (litres > toWc.FreeSpaceLitres)
             {
-                Log.Error(string.Format("TransferWater() trying to put {0} litres into {1} with "
-                    + "{2} litres free space.", litres, toWc.parent.Label, toWc.FreeSpaceLitres));
+                if (litres > toWc.FreeSpaceLitres + 0.001f)
+                {
+                    Log.Error(string.Format("TransferWater() trying to put {0} litres into {1} with "
+                        + "{2} litres free space.", litres, toWc.parent.Label, toWc.FreeSpaceLitres));
+                }
                 litres = toWc.FreeSpaceLitres;
             }
 
