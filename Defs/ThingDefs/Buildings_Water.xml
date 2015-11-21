@@ -126,6 +126,7 @@
             <compClass>achan1989.dehydration.CompWaterContainer</compClass>
             <capacity>120.0</capacity>
             <needsToolUser>false</needsToolUser>
+            <rainWaterCollectionRate>2</rainWaterCollectionRate>
         </li>
     </comps>
     <AltitudeLayer>Waist</AltitudeLayer>
