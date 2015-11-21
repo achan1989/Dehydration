@@ -10,4 +10,14 @@
     </helpTexts>
 </ConceptDef>
 
+<ConceptDef>
+    <defName>Dehydration_WaterStorage</defName>
+    <label>Water storage</label>
+    <priority>4</priority>
+    <minSecondsSinceLesson>300</minSecondsSinceLesson>
+    <helpTexts>
+        <li>Save time by storing water near places where it is needed -- build cisterns or water troughs.</li>
+    </helpTexts>
+</ConceptDef>
+
 </Defs>
