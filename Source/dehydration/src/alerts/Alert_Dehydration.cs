@@ -7,7 +7,7 @@ using Verse;
 
 namespace achan1989.dehydration
 {
-    public class Alert_NeedWaterSource : Alert_Medium
+    public class Alert_Dehydration : Alert_Medium
     {
         public static readonly string explanation = "These colonists are dehydrated:\n\n{0}\n" +
             "Get them some water. You'll need a nearby water source like a pond or well.";
@@ -29,7 +29,7 @@ namespace achan1989.dehydration
             get { return AlertReport.CulpritIs(DehydratedColonists.FirstOrDefault()); }
         }
 
-        public Alert_NeedWaterSource()
+        public Alert_Dehydration()
         {
             this.baseLabel = "Dehydration";
         }

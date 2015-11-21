@@ -49,7 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\AI\PawnLocalAwareness.cs" />
     <Compile Include="src\AI\ThinkNode_ConditionalUrgentlyThirsty.cs" />
-    <Compile Include="src\alerts\Alert_NeedWaterSource.cs" />
+    <Compile Include="src\alerts\Alert_Dehydration.cs" />
     <Compile Include="src\commands\CommandGizmo_ChangeWaterFillage.cs" />
     <Compile Include="src\commands\CommandGizmo_ChangeWaterFillPriority.cs" />
     <Compile Include="src\commands\CommandGizmo_WaterContainerStatus.cs" />
