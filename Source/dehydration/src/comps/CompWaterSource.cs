@@ -59,6 +59,14 @@ namespace achan1989.dehydration
                 }
                 StoredLitres = propsw.startsWith;
             }
+
+            // Assume that any Building that has a CompWaterSource is enough to fulfil
+            // concept knowledge about water-producing buildings.
+            if (this.parent as Building != null)
+            {
+                ConceptDatabase.KnowledgeDemonstrated(DefDatabase<ConceptDef>.GetNamedSilentFail("Dehydration_NeedWaterSource"),
+                                                      KnowledgeAmount.Total);
+            }
         }
 
         private float RegenPerRareTick

@@ -166,6 +166,12 @@ namespace achan1989.dehydration
                 }
                 this.tickToDehydrationDamage = TicksBetweenDehydrationDamage;
             }
+
+            if (this.pawn.IsColonist && this.CurCategory == HydratedCategory.UrgentlyThirsty)
+            {
+                ConceptDecider.TeachOpportunity(DefDatabase<ConceptDef>.GetNamedSilentFail("Dehydration_NeedWaterSource"),
+                                                OpportunityType.Important);
+            }
 		}
 
         public float DrinkFrom(CompWaterContainer waterContainer, float litresWanted)

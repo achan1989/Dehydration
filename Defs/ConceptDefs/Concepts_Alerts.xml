@@ -25,4 +25,17 @@
     </helpTexts>
 </ConceptDef>
 
+<!-- Triggered by conditions. -->
+
+<ConceptDef>
+    <defName>Dehydration_NeedWaterSource</defName>
+    <label>Need a water source</label>
+    <priority>40</priority>
+    <alertDisplay>true</alertDisplay>
+    <needsOpportunity>True</needsOpportunity>
+    <helpTexts>
+        <li>If there is no natural water source on the map, you can dig an IMPROVISED WELL for your colonists.</li>
+    </helpTexts>
+</ConceptDef>
+
 </Defs>
