@@ -167,6 +167,12 @@ namespace achan1989.dehydration
             }
 
             if (fillageIndex == -1) { fillageIndex = defaultFillageIndex; }
+            if (this.parent.def.defName.StartsWith("Apparel_Waterskin_") ||
+                this.parent.def.defName.StartsWith("Apparel_Canteen_"))
+            {
+                ConceptDatabase.KnowledgeDemonstrated(DefDatabase<ConceptDef>.GetNamedSilentFail("Dehydration_WaterskinsCanteens"),
+                                                      KnowledgeAmount.Total);
+            }
         }
 
         public override void PostExposeData()
