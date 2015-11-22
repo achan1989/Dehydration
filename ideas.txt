@@ -24,7 +24,7 @@ Digging canals?  Water in lakes (not edge-connected) eventually runs out if you 
 
 Health
 ------
-Drinking from terrain water and improvised wells can cause sickness.  Water treatment plants?  Seems like overkill.
+Drinking from terrain water and improvised wells = tainted water, causes bad mood and may cause sickness.  Water treatment plants?  Seems like overkill.
 
 Apparel
 -------
