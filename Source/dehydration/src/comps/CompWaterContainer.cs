@@ -168,18 +168,24 @@ namespace achan1989.dehydration
 
             if (fillageIndex == -1) { fillageIndex = defaultFillageIndex; }
 
-            // Slightly hacky and non-accurate way of determining when the player has made a bucket.
-            if (this.parent.def.defName.Equals("Dehydration_Bucket"))
+            // A CompWaterContainer can be created to fake the water available in a tile of water in
+            // the environment, but it doesn't actually have a parent.  The hacky things below aren't
+            // valid in that case.
+            if (this.parent != null)
             {
-                ConceptDatabase.KnowledgeDemonstrated(DefDatabase<ConceptDef>.GetNamedSilentFail("Dehydration_HaulWaterTool"),
-                                                      KnowledgeAmount.Total);
-            }
-            // Ditto for waterskins and canteens.
-            if (this.parent.def.defName.StartsWith("Apparel_Waterskin_") ||
-                this.parent.def.defName.StartsWith("Apparel_Canteen_"))
-            {
-                ConceptDatabase.KnowledgeDemonstrated(DefDatabase<ConceptDef>.GetNamedSilentFail("Dehydration_WaterskinsCanteens"),
-                                                      KnowledgeAmount.Total);
+                // Slightly hacky and non-accurate way of determining when the player has made a bucket.
+                if (this.parent.def.defName.Equals("Dehydration_Bucket"))
+                {
+                    ConceptDatabase.KnowledgeDemonstrated(DefDatabase<ConceptDef>.GetNamedSilentFail("Dehydration_HaulWaterTool"),
+                                                          KnowledgeAmount.Total);
+                }
+                // Ditto for waterskins and canteens.
+                if (this.parent.def.defName.StartsWith("Apparel_Waterskin_") ||
+                    this.parent.def.defName.StartsWith("Apparel_Canteen_"))
+                {
+                    ConceptDatabase.KnowledgeDemonstrated(DefDatabase<ConceptDef>.GetNamedSilentFail("Dehydration_WaterskinsCanteens"),
+                                                          KnowledgeAmount.Total);
+                }
             }
         }
 
@@ -195,7 +201,7 @@ namespace achan1989.dehydration
         {
             base.CompTickRare();
 
-            if (props.rainWaterCollectionRate > 0 && Find.WeatherManager.RainRate > 0.01f)
+            if (this.parent != null && props.rainWaterCollectionRate > 0 && Find.WeatherManager.RainRate > 0.01f)
             {
                 // Assume that each cell of a building is equally responsible for collecting water.
                 // Calculate water collection rate based on how many cells of the building are
